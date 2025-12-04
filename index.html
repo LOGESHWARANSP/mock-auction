@@ -106,9 +106,35 @@ function showMsg(text, color="white") {
       // Optional: show login message in current tab
       showMsg("Login successful! Team page opened.", "lightgreen");
 
-    } catch (e) {
-      showMsg(e.message, "tomato");
+    }  catch (e) {
+    let errorMsg = "Login failed!";
+
+    switch (e.code) {
+        case "auth/user-not-found":
+            errorMsg = "No account found with this email!";
+            break;
+
+        case "auth/wrong-password":
+            errorMsg = "Incorrect password!";
+            break;
+
+        case "auth/invalid-email":
+            errorMsg = "Invalid email format!";
+            break;
+
+        case "auth/invalid-login-credentials":
+            errorMsg = "Incorrect email or password!";
+            break;
+
+        default:
+            errorMsg = "Invalid Email or Password!";
     }
+
+    alert(errorMsg);  // ✅ REAL POPUP ALERT
+}
+
+
+
   });
 </script>
 

@@ -104,5 +104,88 @@ button:hover {
 .soldBtn { background:#22c55e; color:white; }
 .unsoldBtn { background:#f59e0b; color:white; }
 .cancelBtn { background:#ef4444; color:white; }
+/* =============================== */
+/* RESPONSIVE DESIGN FIXES         */
+/* =============================== */
+
+/* --- Tablets (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+    h1 { font-size: 2.4em; }
+    #currentBox {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    #currentBox img {
+        width: 150px;
+        height: 150px;
+    }
+    .current-info h2 { font-size: 2em; }
+}
+
+/* --- Mobiles (max-width: 768px) --- */
+@media (max-width: 768px) {
+    body { padding: 10px; }
+
+    h1 { font-size: 1.9em; }
+    .subtitle { font-size: 0.9em; }
+
+    #currentBox {
+        padding: 18px;
+        gap: 18px;
+    }
+    #currentBox img {
+        width: 130px;
+        height: 130px;
+    }
+    .bid { font-size: 1.8em; }
+    .current-info p { font-size: 1.1em; }
+
+    .table th, .table td {
+        padding: 12px;
+        font-size: 0.85em;
+    }
+
+    .squad-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .squad-card {
+        padding: 18px;
+    }
+    .squad-header img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* --- Small phones (max-width: 480px) --- */
+@media (max-width: 480px) {
+    h1 { font-size: 1.6em; }
+
+    #currentBox img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .current-info h2 { font-size: 1.4em; }
+
+    .bid { font-size: 1.5em; }
+
+    .table {
+        font-size: 12px;
+    }
+
+    .player-item {
+        flex-direction: column;
+        text-align: left;
+        gap: 6px;
+    }
+
+    .price-tag {
+        align-self: flex-start;
+    }
+}
+
 
 
