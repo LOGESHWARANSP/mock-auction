@@ -28,6 +28,13 @@
       <button id="loginBtn">Login</button>
       <p id="msg"></p>
     </div>
+    <button id="viewerBtn" style="
+  width:95%; padding:12px; margin-top:10px;
+  border-radius:8px; border:none;
+  background:#00e5ff; font-weight:700;
+  cursor:pointer; color:#000;
+">View Live Auction</button>
+
 
   </div>
 
@@ -54,6 +61,9 @@ function showMsg(text, color="white") {
     }, 3000);
 }
 
+  document.getElementById("viewerBtn").addEventListener("click", () => {
+      window.open("auction-view.html", "_blank");
+  });
 
   loginBtn.addEventListener("click", async () => {
     const email = emailEl.value.trim();
