@@ -1,0 +1,108 @@
+body {
+  background: #0f172a;
+  color: #f1f5f9;
+  font-family: "Inter", Arial, sans-serif;
+  padding: 20px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.3);
+}
+
+h2, h3 {
+  margin-top: 25px;
+  color: #e2e8f0;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 6px;
+}
+
+input, select {
+  background: #0f172a;
+  border: 1px solid #334155;
+  color: #f1f5f9;
+  padding: 6px 10px;
+  border-radius: 6px;
+  outline: none;
+}
+
+button {
+  background:#2563eb;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+#resetAllBtn {
+  background:#ef4444 !important;
+}
+
+.table {
+  width:100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.table th {
+  background:#0f172a;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #334155;
+  font-size: 14px;
+}
+
+#live {
+  background:#0f172a;
+  padding: 20px;
+  border-radius: 10px;
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  margin-top: 15px;
+}
+
+#live p {
+  margin: 5px 0;
+}
+
+.live-controls button {
+  margin-right: 6px;
+  margin-top: 8px;
+}
+
+#log {
+  background:#0f172a;
+  border-radius: 8px;
+}
+#searchResults div {
+  padding:8px;
+  cursor:pointer;
+  font-size:14px;
+  border-bottom:1px solid #eee;
+  color:black;
+  background:white;
+}
+
+#searchResults div:hover {
+  background:#007bff;
+  color:white;
+}
+.soldBtn { background:#22c55e; color:white; }
+.unsoldBtn { background:#f59e0b; color:white; }
+.cancelBtn { background:#ef4444; color:white; }
+
+

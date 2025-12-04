@@ -1,0 +1,964 @@
+[
+  { "id": "p001", "name": "Rohit Sharma", "role": "Batsman", "country": "India", "basePrice": 20000000 },
+  { "id": "p002", "name": "Virat Kohli", "role": "Batsman", "country": "India", "basePrice": 20000000 },
+  { "id": "p003", "name": "Shubman Gill", "role": "Batsman", "country": "India", "basePrice": 10000000 },
+  { "id": "p004", "name": "Ruturaj Gaikwad", "role": "Batsman", "country": "India", "basePrice": 10000000 },
+  { "id": "p005", "name": "Yashasvi Jaiswal", "role": "Batsman", "country": "India", "basePrice": 7500000 },
+
+  { "id": "p006", "name": "KL Rahul", "role": "Wicket Keeper", "country": "India", "basePrice": 20000000 },
+  { "id": "p007", "name": "Sanju Samson", "role": "Wicket Keeper", "country": "India", "basePrice": 12000000 },
+  { "id": "p008", "name": "Ishan Kishan", "role": "Wicket Keeper", "country": "India", "basePrice": 8000000 },
+  { "id": "p009", "name": "Rishabh Pant", "role": "Wicket Keeper", "country": "India", "basePrice": 20000000 },
+
+  { "id": "p010", "name": "Hardik Pandya", "role": "All Rounder", "country": "India", "basePrice": 20000000 },
+  { "id": "p011", "name": "Ravindra Jadeja", "role": "All Rounder", "country": "India", "basePrice": 20000000 },
+  { "id": "p012", "name": "Axar Patel", "role": "All Rounder", "country": "India", "basePrice": 12000000 },
+
+  { "id": "p015", "name": "Jasprit Bumrah", "role": "Bowler", "country": "India", "basePrice": 20000000 },
+  { "id": "p016", "name": "Mohammed Shami", "role": "Bowler", "country": "India", "basePrice": 16000000 },
+  { "id": "p017", "name": "Kuldeep Yadav", "role": "Bowler", "country": "India", "basePrice": 12000000 },
+  { "id": "p018", "name": "Yuzvendra Chahal", "role": "Bowler", "country": "India", "basePrice": 12000000 },
+  { "id": "p019", "name": "Mohammed Siraj", "role": "Bowler", "country": "India", "basePrice": 8000000 },
+
+  { "id": "p021", "name": "Tilak Varma", "role": "Batsman", "country": "India", "basePrice": 4000000 },
+  { "id": "p022", "name": "Rahul Tewatia", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+  { "id": "p023", "name": "Rinku Singh", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p024", "name": "Shreyas Iyer", "role": "Batsman", "country": "India", "basePrice": 12000000 },
+  { "id": "p025", "name": "Suryakumar Yadav", "role": "Batsman", "country": "India", "basePrice": 16000000 },
+
+  { "id": "p026", "name": "Deepak Chahar", "role": "Bowler", "country": "India", "basePrice": 8000000 },
+  { "id": "p027", "name": "Prasidh Krishna", "role": "Bowler", "country": "India", "basePrice": 5000000 },
+
+  { "id": "p029", "name": "Shubham Dubey", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p030", "name": "R Sai Kishore", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p031", "name": "Abhishek Sharma", "role": "All Rounder", "country": "India", "basePrice": 5000000 },
+  { "id": "p032", "name": "T Natarajan", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p033", "name": "Varun Chakravarthy", "role": "Bowler", "country": "India", "basePrice": 8000000 },
+  { "id": "p034", "name": "Mayank Agarwal", "role": "Batsman", "country": "India", "basePrice": 5000000 },
+  { "id": "p035", "name": "Devdutt Padikkal", "role": "Batsman", "country": "India", "basePrice": 4000000 },
+
+  { "id": "p036", "name": "Sarfaraz Khan", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p037", "name": "Manish Pandey", "role": "Batsman", "country": "India", "basePrice": 5000000 },
+  { "id": "p038", "name": "Ajinkya Rahane", "role": "Batsman", "country": "India", "basePrice": 5000000 },
+  { "id": "p039", "name": "Ambati Rayudu", "role": "Wicket Keeper", "country": "India", "basePrice": 5000000 },
+  { "id": "p040", "name": "Wriddhiman Saha", "role": "Wicket Keeper", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p041", "name": "Umesh Yadav", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p042", "name": "Ishant Sharma", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p043", "name": "Harshal Patel", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p044", "name": "Krunal Pandya", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+  { "id": "p045", "name": "Rajat Patidar", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p046", "name": "Sai Sudharsan", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p047", "name": "Rahul Tripathi", "role": "Batsman", "country": "India", "basePrice": 4000000 },
+  { "id": "p048", "name": "Shivam Mavi", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p049", "name": "Jaydev Unadkat", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p050", "name": "Vijay Shankar", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p051", "name": "Atharva Taide", "role": "Batsman", "country": "India", "basePrice": 4000000 },
+
+
+  { "id": "p054", "name": "Harpreet Singh", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p055", "name": "Yash Dayal", "role": "Bowler", "country": "India", "basePrice": 7500000 },
+
+  { "id": "p056", "name": "Akash Deep", "role": "Bowler", "country": "India", "basePrice": 5000000 },
+  { "id": "p057", "name": "Akshay Karnewar", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p058", "name": "Anmolpreet Singh", "role": "Batsman", "country": "India", "basePrice": 4000000 },
+  { "id": "p059", "name": "Aniket Choudhary", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p060", "name": "Basil Thampi", "role": "Bowler", "country": "India", "basePrice": 4000000 },
+
+  { "id": "p061", "name": "C Hari Nishanth", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p062", "name": "Dhruv Shorey", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p063", "name": "Gurkeerat Mann", "role": "All Rounder", "country": "India", "basePrice": 5000000 },
+  { "id": "p064", "name": "Jagadeesha Suchith", "role": "All Rounder", "country": "India", "basePrice": 5000000 },
+  { "id": "p065", "name": "Kedar Jadhav", "role": "All Rounder", "country": "India", "basePrice": 7500000 },
+
+  { "id": "p066", "name": "KM Asif", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p067", "name": "Lalit Yadav", "role": "All Rounder", "country": "India", "basePrice": 5000000 },
+  { "id": "p068", "name": "M Siddharth", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p069", "name": "Mohit Rathee", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p070", "name": "Mukesh Choudhary", "role": "Bowler", "country": "India", "basePrice": 5000000 },
+
+  { "id": "p072", "name": "Nishant Sindhu", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+  { "id": "p073", "name": "P Saravana Kumar", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p074", "name": "Prabhsimran Singh", "role": "Wicket Keeper", "country": "India", "basePrice": 7500000 },
+  { "id": "p075", "name": "Pulkit Narang", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p077", "name": "R Samarth", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p078", "name": "Ramandeep Singh", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+  { "id": "p079", "name": "Rohan Kadam", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p080", "name": "Sachin Baby", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p081", "name": "Shahbaz Ahmed", "role": "All Rounder", "country": "India", "basePrice": 10000000 },
+  { "id": "p082", "name": "Sanjay Yadav", "role": "All Rounder", "country": "India", "basePrice": 5000000 },
+  { "id": "p083", "name": "Shivam Chauhan", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p084", "name": "Saurabh Dubey", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p085", "name": "Tushar Deshpande", "role": "Bowler", "country": "India", "basePrice": 5000000 },
+  { "id": "p086", "name": "Utkarsh Singh", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p087", "name": "Vishnu Vinod", "role": "Wicket Keeper", "country": "India", "basePrice": 4000000 },
+  { "id": "p088", "name": "Yuvraj Chudasama", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p089", "name": "Abhinav Manohar", "role": "Batsman", "country": "India", "basePrice": 5000000 },
+  { "id": "p090", "name": "Aman Hakim Khan", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+
+  { "id": "p091", "name": "Ayush Badoni", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+  { "id": "p092", "name": "Bhuvneshwar Solanki", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p093", "name": "Chirag Jani", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p094", "name": "Gurnoor Singh Brar", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p095", "name": "Harvik Desai", "role": "Wicket Keeper", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p096", "name": "Himanshu Sharma", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p097", "name": "Jitesh Sharma", "role": "Wicket Keeper", "country": "India", "basePrice": 5000000 },
+  { "id": "p098", "name": "Karan Sharma", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p099", "name": "Mohammed Taha", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p100", "name": "Nehal Wadhera", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+
+  { "id": "p101", "name": "Shivam Dube", "role": "All Rounder", "country": "India", "basePrice": 7500000 },
+  { "id": "p102", "name": "Washington Sundar", "role": "All Rounder", "country": "India", "basePrice": 10000000 },
+  { "id": "p103", "name": "Navdeep Saini", "role": "Bowler", "country": "India", "basePrice": 7500000 },
+
+  { "id": "p105", "name": "Umran Malik", "role": "Bowler", "country": "India", "basePrice": 10000000 },
+
+  { "id": "p106", "name": "Prithvi Shaw", "role": "Batsman", "country": "India", "basePrice": 5000000 },
+
+
+  { "id": "p110", "name": "Karun Nair", "role": "Batsman", "country": "India", "basePrice": 5000000 },
+
+
+  { "id": "p113", "name": "Mukesh Kumar", "role": "Bowler", "country": "India", "basePrice": 7500000 },
+  { "id": "p114", "name": "Arshdeep Singh", "role": "Bowler", "country": "India", "basePrice": 10000000 },
+  { "id": "p115", "name": "Harshit Rana", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p116", "name": "Kartik Tyagi", "role": "Bowler", "country": "India", "basePrice": 4000000 },
+  { "id": "p117", "name": "Anukul Roy", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p118", "name": "Baba Indrajith", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p119", "name": "KS Bharat", "role": "Wicket Keeper", "country": "India", "basePrice": 5000000 },
+  { "id": "p120", "name": "Narayan Jagadeesan", "role": "Wicket Keeper", "country": "India", "basePrice": 4000000 },
+
+  { "id": "p121", "name": "Rasikh Salam", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p122", "name": "Kanishk Seth", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p123", "name": "Avesh Khan", "role": "Bowler", "country": "India", "basePrice": 10000000 },
+
+
+
+  { "id": "p126", "name": "Riyan Parag", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p127", "name": "Mahipal Lomror", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p128", "name": "Shahrukh Khan", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+ 
+  { "id": "p130", "name": "Odisha Kaushal", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p131", "name": "Tim David", "role": "All Rounder", "country": "Australia", "basePrice": 10000000 },
+  { "id": "p132", "name": "Daniel Sams", "role": "All Rounder", "country": "Australia", "basePrice": 7500000 },
+
+  { "id": "p150", "name": "Glenn Phillips", "role": "Wicket Keeper", "country": "New Zealand", "basePrice": 10000000 },
+  { "id": "p151", "name": "Tim Southee", "role": "Bowler", "country": "New Zealand", "basePrice": 16000000 },
+  { "id": "p152", "name": "Josh Clarkson", "role": "All Rounder", "country": "New Zealand", "basePrice": 5000000 },
+  { "id": "p153", "name": "Mitchell Holmes", "role": "Bowler", "country": "New Zealand", "basePrice": 4000000 },
+
+  { "id": "p154", "name": "Charith Asalanka", "role": "All Rounder", "country": "Sri Lanka", "basePrice": 7500000 },
+  { "id": "p155", "name": "George Worker", "role": "Batsman", "country": "New Zealand", "basePrice": 6000000 },
+  { "id": "p156", "name": "Kurtis Patterson", "role": "Batsman", "country": "Australia", "basePrice": 10000000 },
+  { "id": "p157", "name": "Ben Sears", "role": "Bowler", "country": "New Zealand", "basePrice": 8000000 },
+  { "id": "p158", "name": "Tom Bruce", "role": "Batsman", "country": "New Zealand", "basePrice": 5500000 },
+
+
+
+  { "id": "p160", "name": "Rachin Ravindra", "role": "All Rounder", "country": "New Zealand", "basePrice": 12000000 },
+  { "id": "p161", "name": "Ben Lister", "role": "Bowler", "country": "New Zealand", "basePrice": 7000000 },
+
+  { "id": "p162", "name": "Marcus Stoinis", "role": "All Rounder", "country": "Australia", "basePrice": 20000000 },
+  { "id": "p163", "name": "Mitchell Marsh", "role": "All Rounder", "country": "Australia", "basePrice": 25000000 },
+  { "id": "p164", "name": "Alex Carey", "role": "Wicket Keeper", "country": "Australia", "basePrice": 10000000 },
+  { "id": "p165", "name": "Adam Zampa", "role": "Bowler", "country": "Australia", "basePrice": 16000000 },
+  { "id": "p166", "name": "Matt Henry", "role": "Bowler", "country": "New Zealand", "basePrice": 9000000 },
+
+  { "id": "p167", "name": "Daryl Mitchell", "role": "All Rounder", "country": "New Zealand", "basePrice": 18000000 },
+  { "id": "p168", "name": "Matt Renshaw", "role": "Batsman", "country": "Australia", "basePrice": 5000000 },
+  { "id": "p169", "name": "Ashton Turner", "role": "Batsman", "country": "Australia", "basePrice": 6000000 },
+
+  { "id": "p170", "name": "Dasun Shanaka", "role": "All Rounder", "country": "Sri Lanka", "basePrice": 8000000 },
+  { "id": "p171", "name": "Pathum Nissanka", "role": "Batsman", "country": "Sri Lanka", "basePrice": 7500000 },
+  { "id": "p172", "name": "Wanindu Hasaranga", "role": "All Rounder", "country": "Sri Lanka", "basePrice": 20000000 },
+  { "id": "p173", "name": "Maheesh Theekshana", "role": "Bowler", "country": "Sri Lanka", "basePrice": 10000000 },
+  { "id": "p174", "name": "Lahiru Kumara", "role": "Bowler", "country": "Sri Lanka", "basePrice": 8000000 },
+
+  { "id": "p175", "name": "Travis Head", "role": "Batsman", "country": "Australia", "basePrice": 20000000 },
+  { "id": "p176", "name": "Cameron Green", "role": "All Rounder", "country": "Australia", "basePrice": 30000000 },
+  { "id": "p177", "name": "Josh Inglis", "role": "Wicket Keeper", "country": "Australia", "basePrice": 10000000 },
+  { "id": "p178", "name": "Jhye Richardson", "role": "Bowler", "country": "Australia", "basePrice": 13000000 },
+  { "id": "p179", "name": "Sean Abbott", "role": "Bowler", "country": "Australia", "basePrice": 9000000 },
+
+  { "id": "p180", "name": "Trent Boult", "role": "Bowler", "country": "New Zealand", "basePrice": 20000000 },
+  { "id": "p181", "name": "Devon Conway", "role": "Wicket Keeper", "country": "New Zealand", "basePrice": 20000000 },
+  { "id": "p182", "name": "Martin Guptill", "role": "Batsman", "country": "New Zealand", "basePrice": 12000000 },
+  { "id": "p183", "name": "Lockie Ferguson", "role": "Bowler", "country": "New Zealand", "basePrice": 18000000 },
+  { "id": "p184", "name": "Mitchell Santner", "role": "All Rounder", "country": "New Zealand", "basePrice": 14000000 },
+  { "id": "p185", "name": "Ish Sodhi", "role": "Bowler", "country": "New Zealand", "basePrice": 8000000 },
+  { "id": "p186", "name": "Jimmy Neesham", "role": "All Rounder", "country": "New Zealand", "basePrice": 10000000 },
+  { "id": "p187", "name": "Finn Allen", "role": "Wicket Keeper", "country": "New Zealand", "basePrice": 7500000 },
+  { "id": "p188", "name": "Matt Short", "role": "All Rounder", "country": "Australia", "basePrice": 6000000 },
+  { "id": "p189", "name": "Ben McDermott", "role": "Wicket Keeper", "country": "Australia", "basePrice": 6000000 },
+
+  { "id": "p190", "name": "Rassie van der Dussen", "role": "Batsman", "country": "South Africa", "basePrice": 10000000 },
+  { "id": "p191", "name": "Reeza Hendricks", "role": "Batsman", "country": "South Africa", "basePrice": 8000000 },
+  { "id": "p192", "name": "Lungi Ngidi", "role": "Bowler", "country": "South Africa", "basePrice": 8000000 },
+  { "id": "p193", "name": "Anrich Nortje", "role": "Bowler", "country": "South Africa", "basePrice": 18000000 },
+  { "id": "p194", "name": "Tabraiz Shamsi", "role": "Bowler", "country": "South Africa", "basePrice": 10000000 },
+
+  { "id": "p195", "name": "Will Young", "role": "Batsman", "country": "New Zealand", "basePrice": 6000000 },
+  { "id": "p196", "name": "Kyle Jamieson", "role": "Bowler", "country": "New Zealand", "basePrice": 12000000 },
+  { "id": "p197", "name": "Colin Munro", "role": "Batsman", "country": "New Zealand", "basePrice": 8000000 },
+  { "id": "p198", "name": "Tom Latham", "role": "Wicket Keeper", "country": "New Zealand", "basePrice": 6000000 },
+  { "id": "p199", "name": "Dane Cleaver", "role": "Wicket Keeper", "country": "New Zealand", "basePrice": 5000000 },
+
+  { "id": "p200", "name": "Sandeep Lamichhane", "role": "Bowler", "country": "Nepal", "basePrice": 4000000 },
+  { "id": "p201", "name": "Dipendra Singh Airee", "role": "All Rounder", "country": "Nepal", "basePrice": 3000000 },
+  { "id": "p202", "name": "Gulshan Jha", "role": "All Rounder", "country": "Nepal", "basePrice": 3000000 },
+  { "id": "p203", "name": "Karan KC", "role": "Bowler", "country": "Nepal", "basePrice": 3000000 },
+  { "id": "p204", "name": "Rohit Paudel", "role": "Batsman", "country": "Nepal", "basePrice": 3000000 },
+
+  { "id": "p205", "name": "Sharad Vesawkar", "role": "All Rounder", "country": "Nepal", "basePrice": 3000000 },
+  { "id": "p206", "name": "Sompal Kami", "role": "Bowler", "country": "Nepal", "basePrice": 3000000 },
+  { "id": "p207", "name": "Sundeep Jora", "role": "Batsman", "country": "Nepal", "basePrice": 3000000 },
+
+  { "id": "p208", "name": "Najmul Hossain Shanto", "role": "Batsman", "country": "Bangladesh", "basePrice": 6000000 },
+  { "id": "p209", "name": "Litton Das", "role": "Wicket Keeper", "country": "Bangladesh", "basePrice": 8000000 },
+  { "id": "p210", "name": "Mushfiqur Rahim", "role": "Wicket Keeper", "country": "Bangladesh", "basePrice": 12000000 },
+  { "id": "p211", "name": "Towhid Hridoy", "role": "Batsman", "country": "Bangladesh", "basePrice": 4000000 },
+  { "id": "p212", "name": "Mahmudullah", "role": "All Rounder", "country": "Bangladesh", "basePrice": 6000000 },
+
+  { "id": "p213", "name": "Mehidy Hasan Miraz", "role": "All Rounder", "country": "Bangladesh", "basePrice": 6000000 },
+  { "id": "p214", "name": "Taskin Ahmed", "role": "Bowler", "country": "Bangladesh", "basePrice": 8000000 },
+  { "id": "p215", "name": "Mustafizur Rahman", "role": "Bowler", "country": "Bangladesh", "basePrice": 16000000 },
+  { "id": "p216", "name": "Shoriful Islam", "role": "Bowler", "country": "Bangladesh", "basePrice": 5000000 },
+  { "id": "p217", "name": "Nasum Ahmed", "role": "Bowler", "country": "Bangladesh", "basePrice": 4000000 },
+
+  { "id": "p218", "name": "Sikandar Raza", "role": "All Rounder", "country": "Zimbabwe", "basePrice": 8000000 },
+  { "id": "p219", "name": "Sean Williams", "role": "All Rounder", "country": "Zimbabwe", "basePrice": 10000000 },
+  { "id": "p220", "name": "Ryan Burl", "role": "All Rounder", "country": "Zimbabwe", "basePrice": 5000000 },
+  { "id": "p221", "name": "Blessing Muzarabani", "role": "Bowler", "country": "Zimbabwe", "basePrice": 4000000 },
+  { "id": "p222", "name": "Richard Ngarava", "role": "Bowler", "country": "Zimbabwe", "basePrice": 3000000 },
+
+  { "id": "p223", "name": "Andy Flower", "role": "Wicket Keeper", "country": "Zimbabwe", "basePrice": 10000000 },
+  { "id": "p224", "name": "Wesley Madhevere", "role": "All Rounder", "country": "Zimbabwe", "basePrice": 3000000 },
+  { "id": "p225", "name": "Craig Ervine", "role": "Batsman", "country": "Zimbabwe", "basePrice": 5000000 },
+  { "id": "p226", "name": "Luke Jongwe", "role": "All Rounder", "country": "Zimbabwe", "basePrice": 4000000 },
+  { "id": "p227", "name": "Brandon Mavuta", "role": "Bowler", "country": "Zimbabwe", "basePrice": 3000000 },
+
+  { "id": "p228", "name": "Gerhard Erasmus", "role": "All Rounder", "country": "Namibia", "basePrice": 4000000 },
+  { "id": "p229", "name": "JJ Smit", "role": "All Rounder", "country": "Namibia", "basePrice": 4000000 },
+  { "id": "p230", "name": "Jan Frylinck", "role": "All Rounder", "country": "Namibia", "basePrice": 3000000 },
+  { "id": "p231", "name": "Bernard Scholtz", "role": "Bowler", "country": "Namibia", "basePrice": 3000000 },
+  { "id": "p232", "name": "Michael van Lingen", "role": "Batsman", "country": "Namibia", "basePrice": 3000000 },
+
+  { "id": "p233", "name": "Karl Birkenstock", "role": "Bowler", "country": "Namibia", "basePrice": 3000000 },
+  { "id": "p234", "name": "Zane Green", "role": "Wicket Keeper", "country": "Namibia", "basePrice": 3000000 },
+  { "id": "p235", "name": "Ruben Trumpelmann", "role": "Bowler", "country": "Namibia", "basePrice": 3000000 },
+  { "id": "p236", "name": "Stephan Baard", "role": "Batsman", "country": "Namibia", "basePrice": 3000000 },
+  { "id": "p237", "name": "JP Kotze", "role": "Wicket Keeper", "country": "Namibia", "basePrice": 3000000 },
+
+  { "id": "p238", "name": "David Wiese", "role": "All Rounder", "country": "Namibia", "basePrice": 8000000 },
+  { "id": "p239", "name": "Jonathan Smit", "role": "Bowler", "country": "Namibia", "basePrice": 3000000 },
+  { "id": "p240", "name": "Helao Ya France", "role": "Batsman", "country": "Namibia", "basePrice": 3000000 },
+
+  { "id": "p241", "name": "Paul Stirling", "role": "Batsman", "country": "Ireland", "basePrice": 8000000 },
+  { "id": "p242", "name": "Harry Tector", "role": "Batsman", "country": "Ireland", "basePrice": 7000000 },
+  { "id": "id243", "name": "Lorcan Tucker", "role": "Wicket Keeper", "country": "Ireland", "basePrice": 6000000 },
+  { "id": "p244", "name": "Gareth Delany", "role": "All Rounder", "country": "Ireland", "basePrice": 5000000 },
+  { "id": "p245", "name": "Curtis Campher", "role": "All Rounder", "country": "Ireland", "basePrice": 6000000 },
+
+  { "id": "p246", "name": "Mark Adair", "role": "Bowler", "country": "Ireland", "basePrice": 5000000 },
+  { "id": "p247", "name": "Josh Little", "role": "Bowler", "country": "Ireland", "basePrice": 10000000 },
+  { "id": "p248", "name": "Andy McBrine", "role": "Bowler", "country": "Ireland", "basePrice": 4000000 },
+  { "id": "p249", "name": "Benjamin White", "role": "Bowler", "country": "Ireland", "basePrice": 3000000 },
+  { "id": "p250", "name": "Barry McCarthy", "role": "Bowler", "country": "Ireland", "basePrice": 4000000 },
+  { "id": "p251", "name": "Jason Roy", "role": "Batsman", "country": "England", "basePrice": 12000000 },
+  { "id": "p252", "name": "Alex Hales", "role": "Batsman", "country": "England", "basePrice": 16000000 },
+  { "id": "p253", "name": "Phil Salt", "role": "Wicket Keeper", "country": "England", "basePrice": 10000000 },
+  { "id": "p254", "name": "Sam Billings", "role": "Wicket Keeper", "country": "England", "basePrice": 7500000 },
+  { "id": "p255", "name": "Dan Lawrence", "role": "Batsman", "country": "England", "basePrice": 5000000 },
+
+  { "id": "p256", "name": "Tom Abell", "role": "Batsman", "country": "England", "basePrice": 6000000 },
+  { "id": "p257", "name": "James Vince", "role": "Batsman", "country": "England", "basePrice": 10000000 },
+  { "id": "p258", "name": "Brydon Carse", "role": "Bowler", "country": "England", "basePrice": 8000000 },
+  { "id": "p259", "name": "Craig Overton", "role": "Bowler", "country": "England", "basePrice": 6000000 },
+  { "id": "p260", "name": "Jamie Overton", "role": "All Rounder", "country": "England", "basePrice": 7500000 },
+
+  { "id": "p261", "name": "Tom Curran", "role": "All Rounder", "country": "England", "basePrice": 10000000 },
+  { "id": "p262", "name": "Chris Jordan", "role": "Bowler", "country": "England", "basePrice": 7500000 },
+  { "id": "p263", "name": "Joe Root", "role": "Batsman", "country": "England", "basePrice": 20000000 },
+  { "id": "p264", "name": "Ben Duckett", "role": "Batsman", "country": "England", "basePrice": 10000000 },
+  { "id": "p265", "name": "Zak Crawley", "role": "Batsman", "country": "England", "basePrice": 12000000 },
+
+  { "id": "p266", "name": "Ollie Pope", "role": "Batsman", "country": "England", "basePrice": 16000000 },
+  { "id": "p267", "name": "Reece Topley", "role": "Bowler", "country": "England", "basePrice": 9000000 },
+  { "id": "p268", "name": "Jason Behrendorff", "role": "Bowler", "country": "Australia", "basePrice": 10000000 },
+  { "id": "p269", "name": "Nathan Ellis", "role": "Bowler", "country": "Australia", "basePrice": 7500000 },
+  { "id": "p270", "name": "Ben Dwarshuis", "role": "Bowler", "country": "Australia", "basePrice": 7500000 },
+
+  { "id": "p271", "name": "Matt Kuhnemann", "role": "Bowler", "country": "Australia", "basePrice": 5000000 },
+  { "id": "p272", "name": "Daniel Hughes", "role": "Batsman", "country": "Australia", "basePrice": 4000000 },
+  { "id": "p273", "name": "Hilton Cartwright", "role": "All Rounder", "country": "Australia", "basePrice": 5000000 },
+  { "id": "p274", "name": "Andrew Tye", "role": "Bowler", "country": "Australia", "basePrice": 10000000 },
+  { "id": "p275", "name": "Chris Lynn", "role": "Batsman", "country": "Australia", "basePrice": 16000000 },
+
+  { "id": "p276", "name": "Ben Cutting", "role": "All Rounder", "country": "Australia", "basePrice": 7500000 },
+  { "id": "p277", "name": "Daniel Sams", "role": "All Rounder", "country": "Australia", "basePrice": 7500000 },
+  { "id": "p278", "name": "Kurtis Patterson", "role": "Batsman", "country": "Australia", "basePrice": 10000000 },
+  { "id": "p279", "name": "Tom Bruce", "role": "Batsman", "country": "New Zealand", "basePrice": 5500000 },
+  { "id": "p280", "name": "Glenn Phillips", "role": "Wicket Keeper", "country": "New Zealand", "basePrice": 10000000 },
+
+  { "id": "p281", "name": "Josh Clarkson", "role": "All Rounder", "country": "New Zealand", "basePrice": 5000000 },
+  { "id": "p282", "name": "Ben Sears", "role": "Bowler", "country": "New Zealand", "basePrice": 8000000 },
+  { "id": "p283", "name": "Rachin Ravindra", "role": "All Rounder", "country": "New Zealand", "basePrice": 12000000 },
+  { "id": "p284", "name": "Ben Lister", "role": "Bowler", "country": "New Zealand", "basePrice": 7000000 },
+  { "id": "p285", "name": "Matt Henry", "role": "Bowler", "country": "New Zealand", "basePrice": 9000000 },
+
+  { "id": "p286", "name": "Daryl Mitchell", "role": "All Rounder", "country": "New Zealand", "basePrice": 18000000 },
+  { "id": "p287", "name": "Mitchell Santner", "role": "All Rounder", "country": "New Zealand", "basePrice": 14000000 },
+  { "id": "p288", "name": "Lockie Ferguson", "role": "Bowler", "country": "New Zealand", "basePrice": 18000000 },
+  { "id": "p289", "name": "Devon Conway", "role": "Wicket Keeper", "country": "New Zealand", "basePrice": 20000000 },
+  { "id": "p290", "name": "Trent Boult", "role": "Bowler", "country": "New Zealand", "basePrice": 20000000 },
+
+  { "id": "p291", "name": "Wanindu Hasaranga", "role": "All Rounder", "country": "Sri Lanka", "basePrice": 20000000 },
+  { "id": "p292", "name": "Maheesh Theekshana", "role": "Bowler", "country": "Sri Lanka", "basePrice": 10000000 },
+  { "id": "p293", "name": "Dilshan Madushanka", "role": "Bowler", "country": "Sri Lanka", "basePrice": 8000000 },
+  { "id": "p294", "name": "Lahiru Kumara", "role": "Bowler", "country": "Sri Lanka", "basePrice": 8000000 },
+  { "id": "p295", "name": "Charith Asalanka", "role": "All Rounder", "country": "Sri Lanka", "basePrice": 7500000 },
+
+  { "id": "p296", "name": "Pathum Nissanka", "role": "Batsman", "country": "Sri Lanka", "basePrice": 7500000 },
+  { "id": "p297", "name": "Kusal Mendis", "role": "Wicket Keeper", "country": "Sri Lanka", "basePrice": 10000000 },
+  { "id": "p298", "name": "Chamika Karunaratne", "role": "All Rounder", "country": "Sri Lanka", "basePrice": 7500000 },
+  { "id": "p299", "name": "Ashen Bandara", "role": "Batsman", "country": "Sri Lanka", "basePrice": 4000000 },
+  { "id": "p300", "name": "Sadeera Samarawickrama", "role": "Wicket Keeper", "country": "Sri Lanka", "basePrice": 6000000 },
+
+  { "id": "p301", "name": "Shoriful Islam", "role": "Bowler", "country": "Bangladesh", "basePrice": 5000000 },
+  { "id": "p302", "name": "Shamim Hossain", "role": "All Rounder", "country": "Bangladesh", "basePrice": 3000000 },
+  { "id": "p303", "name": "Mahmudul Hasan Joy", "role": "Batsman", "country": "Bangladesh", "basePrice": 5000000 },
+  { "id": "p304", "name": "Soumya Sarkar", "role": "All Rounder", "country": "Bangladesh", "basePrice": 7500000 },
+  { "id": "p305", "name": "Yasir Ali", "role": "Batsman", "country": "Bangladesh", "basePrice": 4000000 },
+
+  { "id": "p306", "name": "Shoriful Islam", "role": "Bowler", "country": "Bangladesh", "basePrice": 5000000 },
+  { "id": "p307", "name": "Kusal Perera", "role": "Wicket Keeper", "country": "Sri Lanka", "basePrice": 10000000 },
+  { "id": "p308", "name": "Angelo Mathews", "role": "All Rounder", "country": "Sri Lanka", "basePrice": 16000000 },
+  { "id": "p309", "name": "Dhananjaya de Silva", "role": "All Rounder", "country": "Sri Lanka", "basePrice": 10000000 },
+  { "id": "p310", "name": "Praveen Jayawickrama", "role": "Bowler", "country": "Sri Lanka", "basePrice": 5000000 },
+
+  { "id": "p311", "name": "Ashok Sharma", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p312", "name": "Kwena Maphaka", "role": "Bowler", "country": "South Africa", "basePrice": 5000000 },
+  { "id": "p313", "name": "Noor Ahmad", "role": "Bowler", "country": "Afghanistan", "basePrice": 4000000 },
+  { "id": "p314", "name": "Ibrahim Zadran", "role": "Batsman", "country": "Afghanistan", "basePrice": 4000000 },
+  { "id": "p315", "name": "Hashmatullah Shahidi", "role": "Batsman", "country": "Afghanistan", "basePrice": 6000000 },
+
+  { "id": "p316", "name": "Qais Ahmad", "role": "Bowler", "country": "Afghanistan", "basePrice": 5000000 },
+  { "id": "p317", "name": "Fazalhaq Farooqi", "role": "Bowler", "country": "Afghanistan", "basePrice": 8000000 },
+  { "id": "p318", "name": "Ikram Alikhil", "role": "Wicket Keeper", "country": "Afghanistan", "basePrice": 4000000 },
+  { "id": "p319", "name": "Musheer Khan", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p320", "name": "Uday Saharan", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p321", "name": "Raj Limbani", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p322", "name": "Rohan Kunnummal", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p323", "name": "Rishi Dhawan", "role": "All Rounder", "country": "India", "basePrice": 5000000 },
+  { "id": "p324", "name": "Shams Mulani", "role": "All Rounder", "country": "India", "basePrice": 3000000 },
+  { "id": "p325", "name": "Apoorv Wankhade", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p326", "name": "Rohan Prem", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p327", "name": "Tanmay Agarwal", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p328", "name": "Harnoor Singh", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p329", "name": "Pradosh Ranjan Paul", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p330", "name": "Shivank Vashisht", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+
+  { "id": "p331", "name": "Pankaj Jaswal", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p332", "name": "Amit Mishra", "role": "Bowler", "country": "India", "basePrice": 5000000 },
+  { "id": "p333", "name": "Saurabh Kumar", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+  { "id": "p334", "name": "Samarth Vyas", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  { "id": "p335", "name": "Vaibhav Suryavanshi", "role": "Batsman", "country": "India", "basePrice": 3000000 },
+  {
+    "id": "p371",
+    "name": "MS Dhoni",
+    "role": "Wicket Keeper",
+    "country": "India",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p372",
+    "name": "Ravichandran Ashwin",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p373",
+    "name": "Jos Buttler",
+    "role": "Wicket Keeper",
+    "country": "England",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p374",
+    "name": "Pat Cummins",
+    "role": "Bowler",
+    "country": "Australia",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p375",
+    "name": "Vansh Bedi",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p376",
+    "name": "Shaik Rasheed",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p377",
+    "name": "Andre Siddarth",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p378",
+    "name": "Sam Curran",
+    "role": "All Rounder",
+    "country": "England",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p379",
+    "name": "Anshul Kamboj",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p380",
+    "name": "Kamlesh Nagarkoti",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 5000000
+  },
+  {
+    "id": "p381",
+    "name": "Ramakrishna Ghosh",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p382",
+    "name": "Khaleel Ahmed",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 10000000
+  },
+
+  {
+    "id": "p383",
+    "name": "Jake Fraser-McGurk",
+    "role": "Batsman",
+    "country": "Australia",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p384",
+    "name": "Harry Brook",
+    "role": "Batsman",
+    "country": "England",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p385",
+    "name": "Tristan Stubbs",
+    "role": "Wicket Keeper",
+    "country": "South Africa",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p386",
+    "name": "Donovan Ferreira",
+    "role": "All Rounder",
+    "country": "South Africa",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p387",
+    "name": "Dushmantha Chameera",
+    "role": "Bowler",
+    "country": "Sri Lanka",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p388",
+    "name": "Mohit Sharma",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p389",
+    "name": "Mitchell Starc",
+    "role": "Bowler",
+    "country": "Australia",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p390",
+    "name": "Vipraj Nigam",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p391",
+    "name": "Sameer Rizvi",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p392",
+    "name": "Ashutosh Sharma",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p393",
+    "name": "Madhav Tiwari",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p394",
+    "name": "Tripurana Vijay",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p395",
+    "name": "Manvanth Kumar",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p396",
+    "name": "Ajay Mandal",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p397",
+    "name": "Darshan Nalkande",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p412",
+    "name": "Rashid Khan",
+    "role": "Bowler",
+    "country": "Afghanistan",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p413",
+    "name": "Kagiso Rabada",
+    "role": "Bowler",
+    "country": "South Africa",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p414",
+    "name": "Sherfane Rutherford",
+    "role": "All Rounder",
+    "country": "West Indies",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p415",
+    "name": "Karim Janat",
+    "role": "All Rounder",
+    "country": "Afghanistan",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p416",
+    "name": "Kulwant Khejroliya",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p417",
+    "name": "Gerald Coetzee",
+    "role": "Bowler",
+    "country": "South Africa",
+    "basePrice": 30000000
+  },
+  {
+    "id": "p418",
+    "name": "Arshad Khan",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p419",
+    "name": "Manav Suthar",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p420",
+    "name": "Nishant Sindhu",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p421",
+    "name": "Jayant Yadav",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p422",
+    "name": "Moeen Ali",
+    "role": "All Rounder",
+    "country": "England",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p423",
+    "name": "Vaibhav Arora",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p424",
+    "name": "Spencer Johnson",
+    "role": "Bowler",
+    "country": "Australia",
+    "basePrice": 30000000
+  },
+  {
+    "id": "p425",
+    "name": "Rovman Powell",
+    "role": "All Rounder",
+    "country": "West Indies",
+    "basePrice": 30000000
+  },
+  {
+    "id": "p426",
+    "name": "Angkrish Raghuvanshi",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p427",
+    "name": "Ramandeep Singh",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p428",
+    "name": "Luvnith Sisodia",
+    "role": "Wicket Keeper",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p429",
+    "name": "Mayank Yadav",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 5000000
+  },
+  {
+    "id": "p430",
+    "name": "Matthew Breetzke",
+    "role": "Batsman",
+    "country": "South Africa",
+    "basePrice": 10000000
+  },
+  {
+    "id": "p431",
+    "name": "Arshin Kulkarni",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 5000000
+  },
+  {
+    "id": "p432",
+    "name": "Shamar Joseph",
+    "role": "Bowler",
+    "country": "West Indies",
+    "basePrice": 10000000
+  },
+  {
+    "id": "p433",
+    "name": "Akash Singh",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p434",
+    "name": "Yuvraj Chaudhary",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p435",
+    "name": "Digvesh Singh",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p436",
+    "name": "Prince Yadav",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p437",
+    "name": "Naman Dhir",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p438",
+    "name": "Ryan Rickelton",
+    "role": "Wicket Keeper",
+    "country": "South Africa",
+    "basePrice": 10000000
+  },
+  {
+    "id": "p439",
+    "name": "Lizaad Williams",
+    "role": "Bowler",
+    "country": "South Africa",
+    "basePrice": 10000000
+  },
+  {
+    "id": "p440",
+    "name": "Robin Minz",
+    "role": "Wicket Keeper",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p441",
+    "name": "Bevon Jacobs",
+    "role": "Bowler",
+    "country": "West Indies",
+    "basePrice": 5000000
+  },
+  {
+    "id": "p442",
+    "name": "Vignesh Puthur",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p443",
+    "name": "Satyanarayana Raju",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p444",
+    "name": "Arjun Tendulkar",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p445",
+    "name": "Krishnan Shrijith",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p446",
+    "name": "Aaron Hardie",
+    "role": "All Rounder",
+    "country": "Australia",
+    "basePrice": 10000000
+  },
+  {
+    "id": "p447",
+    "name": "Suryansh Shedge",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p448",
+    "name": "Azmatullah Omarzai",
+    "role": "All Rounder",
+    "country": "Afghanistan",
+    "basePrice": 10000000
+  },
+  {
+    "id": "p449",
+    "name": "Praveen Dubey",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p450",
+    "name": "Xavier Bartlett",
+    "role": "Bowler",
+    "country": "Australia",
+    "basePrice": 10000000
+  },
+  {
+    "id": "p451",
+    "name": "Vijaykumar Vyshak",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 5000000
+  },
+  {
+    "id": "p452",
+    "name": "Pyla Avinash",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p453",
+    "name": "Priyansh Arya",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p454",
+    "name": "Jofra Archer",
+    "role": "Bowler",
+    "country": "England",
+    "basePrice": 20000000
+  },
+  {
+    "id": "p455",
+    "name": "Shimron Hetmyer",
+    "role": "Batsman",
+    "country": "West Indies",
+    "basePrice": 16000000
+  },
+  {
+    "id": "p456",
+    "name": "Yudhvir Charak",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p458",
+    "name": "Abhinandan Singh",
+    "role": "Bowler",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p459",
+    "name": "Jacob Bethell",
+    "role": "All Rounder",
+    "country": "England",
+    "basePrice": 5000000
+  },
+  {
+    "id": "p460",
+    "name": "Nuwan Thushara",
+    "role": "Bowler",
+    "country": "Sri Lanka",
+    "basePrice": 10000000
+  },
+  {
+    "id": "p461",
+    "name": "Swapnil Singh",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p462",
+    "name": "Manoj Bhandage",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p463",
+    "name": "Swastik Chikara",
+    "role": "Batsman",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+    "id": "p464",
+    "name": "Vijayakanth Viyaskanth",
+    "role": "Bowler",
+    "country": "Sri Lanka",
+    "basePrice": 5000000
+  },
+  {
+    "id": "p465",
+    "name": "Sanvir Singh",
+    "role": "All Rounder",
+    "country": "India",
+    "basePrice": 3000000
+  },
+  {
+  "id": "p466",
+  "name": "Shardul Thakur",
+  "role": "All Rounder",
+  "country": "India",
+  "basePrice": 5000000
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

@@ -1,0 +1,770 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Panel - IPL Auction</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<body>
+ <div class="card" style="width:100%; max-width:1400px; margin:auto;">
+
+    <h2>Admin – IPL Auction Control Panel</h2>
+
+    <!-- Buttons -->
+    <div style="margin-bottom:14px;">
+
+     
+<button id="importJSON" style="
+  background:#4CAF50;
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+">📥 Import players.json → Firestore</button>
+<button id="resetAllBtn" style="
+  background:#ff3333;
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+">🔄 FULL RESET (Teams + Players + Auction)</button>
+
+
+      <p id="resetMsg" style="color:#ccc;font-size:14px;margin-top:6px;"></p>
+    </div>
+
+    <!-- Players Table -->
+    <h3>Players</h3>
+    <input id="search" placeholder="Search Player..." style="
+  width:260px;
+  padding:8px;
+  margin-bottom:10px;
+  border-radius:6px;
+  border:1px solid #999;
+">
+
+
+<div id="searchResults" style="
+  display:none;
+  position:absolute;
+  width:280px;
+  background:white;
+  color:black;
+  border:1px solid #ccc;
+  max-height:250px;
+  overflow-y:auto;
+  z-index:999;
+  border-radius:6px;
+"></div>
+
+    
+    <table class="table" id="playersTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Country</th>
+      <th>Base Price (₹)</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+
+    <!-- Live Auction Panel -->
+    <h3>Live Auction</h3>
+
+<div id="live" class="player-box">
+  <img id="lpImg" src="ipl.jpg" style="width:140px;height:140px;object-fit:cover">
+
+  <h2 id="lpName">-</h2>
+
+  <p><b>Current Bid:</b> ₹ <span id="lpBid">-</span></p>
+  <p><b>Highest Bidder:</b> <span id="lpHighest">-</span></p>
+  <p><b>Interested Teams:</b> <span id="lpInterest">-</span></p>
+
+  <button id="soldBtn" onclick="markSold()">SOLD</button>
+  <button id="unsoldBtn" onclick="markUnsold()">UNSOLD</button>
+</div>
+
+
+    <h3>Teams & Purses</h3>
+<table class="table" id="teamsTable">
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Purse (₹)</th>
+      <th>Total Players (25)</th>
+      <th>Overseas (8)</th>
+      <th>Indians</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+
+
+    <!-- Action Log -->
+    <h3>Action Log</h3>
+    <div id="log" style="max-height:180px;overflow:auto;border:1px solid #eee;padding:8px"></div>
+  </div>
+
+  <!-- Firebase Config -->
+  <script src="firebase.js"></script>
+
+
+
+<!-- ============================ -->
+<!--   ADMIN JAVASCRIPT BELOW    -->
+<!-- ============================ -->
+
+<script>
+  function formatBasePrice(amount) {
+  if (amount >= 10000000) {
+    return (amount / 10000000) + " Cr";   // 1 Cr, 2 Cr, etc.
+  } else {
+    return (amount / 100000) + " L";      // 30 L, 50 L, etc.
+  }
+}
+
+ function lockAllStartButtons(lock, activePlayer = null) {
+  const rows = document.querySelectorAll("#playersTable tbody tr");
+
+  rows.forEach(row => {
+    const btn = row.querySelector("button");
+    const pid = btn.getAttribute("onclick").match(/'(.+)'/)[1];
+
+    if (lock) {
+      // Lock everything except the active player's button
+      if (pid !== activePlayer) {
+        btn.disabled = true;
+        btn.style.opacity = "0.5";
+        btn.style.cursor = "not-allowed";
+      }
+    } else {
+      // Unlock all
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btn.style.cursor = "pointer";
+    }
+  });
+}
+
+
+
+
+
+
+
+
+function addRow(id, p) {
+  const tr = document.createElement('tr');
+
+  const isSold = p.soldTo && p.soldTo !== "UNSOLD";
+
+  tr.innerHTML = `
+    <td>${p.name}</td>
+    <td>${p.role}</td>
+    <td>${p.country}</td>
+    <td>${formatBasePrice(p.basePrice)}</td>
+
+
+    <td>${isSold ? "SOLD" : "Unsold"}</td>
+    <td>
+      <button 
+        ${isSold ? "disabled style='opacity:0.5;cursor:not-allowed;'" : ""}
+        onclick="startAuction('${id}')"
+      >
+        ${isSold ? "SOLD" : "Start"}
+      </button>
+    </td>
+  `;
+
+  document.querySelector('#playersTable tbody').appendChild(tr);
+}
+
+
+
+
+
+function getPlayerCategory(country) {
+  if (!country) return "India";
+
+  const overseasCountries = [
+    "Australia","England","New Zealand","South Africa","Sri Lanka",
+    "Bangladesh","Afghanistan","Ireland","West Indies","Zimbabwe",
+    "Nepal","Netherlands"
+  ];
+
+  return overseasCountries.includes(country) ? "Overseas" : "India";
+}
+
+/* ---------------------------
+   SEED SAMPLE DATA 
+--------------------------- */
+
+/* ---------------------------
+   IMPORT players.json → FIRESTORE
+--------------------------- */
+document.getElementById("importJSON").onclick = async () => {
+  try {
+    const res = await fetch("players.json");
+    const players = await res.json();
+
+    // Optional – clear old players first:
+    // const old = await db.collection("players").get();
+    // old.forEach(doc => doc.ref.delete());
+
+    for (const p of players) {
+      await db.collection("players").doc(p.id).set({
+        name: p.name,
+        role: p.role,
+        country: p.country,
+        basePrice: p.basePrice,
+        soldTo: null,
+        soldPrice: null
+      });
+    }
+
+    alert("✔ NEW players.json imported successfully!");
+    loadPlayers();     // refresh UI
+
+  } catch (err) {
+    alert("Error importing players.json: " + err);
+  }
+};
+
+// Convert "2 Cr" / "75 L" → Number in Rupees
+
+
+
+
+
+
+
+/* ---------------------------
+   SEARCH LIVE DROPDOWN
+--------------------------- */
+
+/* ---------------------------
+   REAL WORKING SEARCH (NO FIREBASE INDEX NEEDED)
+--------------------------- */
+
+let ALL_PLAYERS = []; // cache
+
+// load all players ONCE for searching
+async function loadAllPlayersForSearch() {
+  const snap = await db.collection("players").get();
+  ALL_PLAYERS = snap.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+}
+
+document.getElementById("search").addEventListener("input", function () {
+  const q = this.value.toLowerCase().trim();
+  const box = document.getElementById("searchResults");
+
+  if (q.length === 0) {
+    box.style.display = "none";
+    return;
+  }
+
+  // filter LOCAL LIST (no Firestore query)
+  const results = ALL_PLAYERS.filter(p =>
+    p.name.toLowerCase().includes(q)
+  ).slice(0, 15); // show 15 results max
+
+  let html = "";
+  results.forEach(p => {
+    html += `
+      <div onclick="selectPlayer('${p.id}')"
+           style="padding:8px; cursor:pointer; border-bottom:1px solid #eee;">
+        ${p.name} — ${p.role}
+      </div>`;
+  });
+
+  box.innerHTML = html;
+  box.style.display = "block";
+});
+
+async function selectPlayer(id) {
+  const box = document.getElementById("searchResults");
+  box.style.display = "none";
+
+  const snap = await db.collection("players").doc(id).get();
+  const p = snap.data();
+
+  const tbody = document.querySelector("#playersTable tbody");
+  tbody.innerHTML = "";
+  addRow(id, p);
+}
+
+
+
+/* ---------------------------
+   SELECT PLAYER FROM SEARCH 
+--------------------------- */
+async function selectPlayer(id) {
+  const box = document.getElementById("searchResults");
+  box.style.display = "none";
+
+  const tbody = document.querySelector("#playersTable tbody");
+  tbody.innerHTML = "";
+
+  const snap = await db.collection("players").doc(id).get();
+  const p = snap.data();
+
+  addRow(id, p);
+}
+
+/* ---------------------------
+   FULL RESET SYSTEM  
+--------------------------- */
+document.getElementById("resetAllBtn").onclick = async function () {
+
+  const msg = document.getElementById("resetMsg");
+  msg.style.color = "#ffd700";
+  msg.innerText = "Resetting... please wait...";
+
+  try {
+    const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
+    const INITIAL_PURSE = 1200000000;
+
+
+    // 1️⃣ Delete invalid teams
+    const teamSnap = await db.collection("teams").get();
+    for (const doc of teamSnap.docs) {
+      if (!REAL_TEAMS.includes(doc.id)) {
+        await db.collection("teams").doc(doc.id).delete();
+      }
+    }
+
+    // 2️⃣ Reset official teams
+    for (const t of REAL_TEAMS) {
+      await db.collection("teams").doc(t).set({
+        name: t,
+        purse: INITIAL_PURSE,
+        players: []
+      }, { merge:true });
+    }
+
+    // 3️⃣ Reset all players (remove sold)
+    const playerSnap = await db.collection("players").get();
+    for (const doc of playerSnap.docs) {
+      await db.collection("players").doc(doc.id).update({
+        soldTo: null,
+        soldPrice: null
+      });
+    }
+
+    // 4️⃣ Reset auction
+    await db.collection("auction").doc("current").set({
+      playerID: null,
+      currentBid: 0,
+      highestBidder: null,
+      interestedTeams: [],
+      status: "NOT_STARTED"
+    });
+// 5️⃣ CLEAR ALL OLD LOGS
+const logsSnap = await db.collection("logs").get();
+logsSnap.forEach(doc => doc.ref.delete());
+
+msg.style.color = "#00ff88";
+msg.innerHTML = "✔ FULL RESET COMPLETE — All teams restored, auction cleared.";
+
+// Auto-hide after 3 seconds
+setTimeout(() => {
+    msg.innerHTML = "";
+}, 3000);
+
+
+    loadTeams();
+    loadPlayers();
+
+  } catch (err) {
+    msg.style.color = "tomato";
+    msg.innerText = "Error: " + err.message;
+  }
+};
+
+
+/* ---------------------------
+   LOG HELPER 
+--------------------------- */
+// ---------- Action log: push & live-listen (REPLACE EXISTING LOG CODE) ----------
+function pushLogToFirestore(text) {
+  return db.collection("logs").add({
+    text,
+    ts: Date.now()
+  });
+}
+
+
+function logAction(text) {
+  pushLogToFirestore(text);
+}
+
+db.collection("logs")
+  .orderBy("ts", "desc")
+  .limit(50)
+  .onSnapshot(snap => {
+    const logBox = document.getElementById("log");
+    logBox.innerHTML = "";
+    snap.forEach(doc => {
+      const d = doc.data();
+      const ts = new Date(d.ts);
+logBox.innerHTML += `<div>[${ts.toLocaleTimeString()}] ${d.text}</div>`;
+
+    });
+  });
+
+
+
+/* ---------------------------
+   LOAD PLAYERS 
+--------------------------- */
+function loadPlayers() {
+
+  db.collection("players")
+    .orderBy("name")
+    .onSnapshot(snap => {
+
+      const tbody = document.querySelector('#playersTable tbody');
+      tbody.innerHTML = '';
+
+      let unsold = [];
+
+      snap.forEach(doc => {
+        const p = doc.data();
+
+        // Player is unsold if:
+        // soldTo = null OR soldTo = "UNSOLD"
+        if (p.soldTo === null || p.soldTo === "UNSOLD" || !p.soldTo) {
+          unsold.push({ id: doc.id, ...p });
+        }
+      });
+
+      // Show ONLY 10
+      const show = unsold.slice(0, 10);
+
+      show.forEach(p => {
+        const isSold = p.soldTo && p.soldTo !== "UNSOLD";
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${p.name}</td>
+          <td>${p.role}</td>
+          <td>${p.country}</td>
+          <td>${formatBasePrice(p.basePrice)}</td>
+
+
+          <td>${isSold ? "SOLD" : "Unsold"}</td>
+          <td>
+            <button 
+              ${isSold ? "disabled style='opacity:0.5;cursor:not-allowed;'" : ""}
+              onclick="startAuction('${p.id}')"
+            >
+              ${isSold ? "SOLD" : "Start"}
+            </button>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+
+    });
+}
+
+
+
+
+
+
+
+
+/* ---------------------------
+   LOAD TEAMS 
+--------------------------- */
+
+function loadTeams() {
+
+  const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
+
+  db.collection("teams").onSnapshot(async snap => {
+
+    const tbody = document.querySelector('#teamsTable tbody');
+    tbody.innerHTML = "";  // clear once ONLY
+
+    // Create map for fast access
+    const teamMap = {};
+    snap.docs.forEach(d => teamMap[d.id] = d.data());
+
+    for (const teamId of REAL_TEAMS) {
+     const t = teamMap[teamId] || { purse: 1200000000, players: [] };
+
+
+      const players = t.players || [];
+
+      let overseasCount = 0;
+      for (const pid of players) {
+        const pSnap = await db.collection("players").doc(pid).get();
+        if (pSnap.exists) {
+          const p = pSnap.data();
+          if (p.country !== "India") overseasCount++;
+        }
+      }
+
+      const indianCount = players.length - overseasCount;
+
+      tbody.innerHTML += `
+        <tr>
+          <td>${teamId}</td>
+          <td>${formatBasePrice(t.purse)}</td>
+
+
+          <td>${players.length} / 25</td>
+          <td>${overseasCount} / 8</td>
+          <td>${indianCount}</td>
+        </tr>`;
+    }
+
+  });
+}
+
+
+
+/* ---------------------------
+   START AUCTION 
+--------------------------- */
+async function startAuction(playerId) {
+  const pdoc = await db.collection("players").doc(playerId).get();
+  if (!pdoc.exists) return alert("Player not found");
+
+  const p = pdoc.data();
+
+  await db.collection("auction").doc("current").set({
+    playerID: playerId,
+    currentBid: p.basePrice,
+    highestBidder: null,
+    interestedTeams: [],
+    status: "IN_PROGRESS"
+  });
+
+  logAction(`Started auction for ${p.name}`);
+
+  lockAllStartButtons(true, playerId);
+}
+
+
+
+
+function clearAuctionUI() {
+  document.getElementById("lpImg").src = "ipl.jpg";
+  document.getElementById("lpName").innerText = "-";
+  document.getElementById("lpBid").innerText = "-";
+  document.getElementById("lpHighest").innerText = "-";
+  document.getElementById("lpInterest").innerText = "-";
+}
+
+/* ---------------------------
+   LIVE AUCTION LISTENER + TIMER
+--------------------------- */
+
+let auctionTimer = null;
+let timerSeconds = 25;
+
+db.collection("auction").doc("current").onSnapshot(async snap => {
+  if (!snap.exists) return;
+   const data = snap.data();
+  // 🔐 LOCK / UNLOCK START BUTTONS based on auction status
+if (!data.playerID) {
+    // Auction ended → unlock all
+    lockAllStartButtons(false);
+} else {
+    // Auction running → lock all except current
+    lockAllStartButtons(true, data.playerID);
+}
+
+
+ 
+  const unsoldBtn = document.getElementById("unsoldBtn");
+
+  // ----------------------------------
+  // 1) No active player → reset UI
+  // ----------------------------------
+  if (!data.playerID) {
+    clearAuctionUI();
+    if (auctionTimer) clearInterval(auctionTimer);
+    return;
+  }
+
+  // ----------------------------------
+  // 2) Hide UNSOLD if any team has bid
+  // ----------------------------------
+  if (data.highestBidder) {
+    unsoldBtn.style.display = "none";
+  } else {
+    unsoldBtn.style.display = "inline-block";
+  }
+
+  // ----------------------------------
+  // 3) Start/Restart 15s timer
+  // ----------------------------------
+  if (!data.highestBidder && data.status === "IN_PROGRESS") {
+
+    // Reset previous timer
+    if (auctionTimer) clearInterval(auctionTimer);
+    timerSeconds = 15;
+
+    auctionTimer = setInterval(async () => {
+
+      // No interest after 15 seconds → AUTO UNSOLD
+      if (timerSeconds <= 0) {
+        clearInterval(auctionTimer);
+        await markUnsold(true); // call unified unsold function
+        return;
+      }
+
+      console.log("Timer:", timerSeconds);
+      timerSeconds--;
+
+    }, 1000);
+  }
+
+  // ----------------------------------
+  // 4) If a team bids → stop timer instantly
+  // ----------------------------------
+  if (data.highestBidder) {
+    if (auctionTimer) clearInterval(auctionTimer);
+  }
+
+  // ----------------------------------
+  // 5) Update UI with player details
+  // ----------------------------------
+  const pdoc = await db.collection("players").doc(data.playerID).get();
+  const p = pdoc.data();
+
+  document.getElementById("lpImg").src = p.imageUrl || "ipl.jpg";
+  document.getElementById("lpName").innerText = p.name;
+  document.getElementById("lpBid").innerText = formatBasePrice(data.currentBid);
+
+
+  document.getElementById("lpHighest").innerText =
+    data.highestBidder || "-";
+  document.getElementById("lpInterest").innerText =
+    (data.interestedTeams || []).join(", ") || "-";
+});
+
+
+/* ---------------------------
+   MARK SOLD 
+--------------------------- */
+async function markSold() {
+  const ref = db.collection('auction').doc('current');
+  const snap = await ref.get();
+  const data = snap.data();
+
+  if(!data.playerID) return alert('No active player');
+  if(!data.highestBidder) return alert('No bidder selected');
+
+  const playerId = data.playerID;
+  const finalBid = data.currentBid;
+  const team = data.highestBidder;
+
+  // update player
+  await db.collection('players').doc(playerId).update({
+    soldTo: team,
+    soldPrice: finalBid
+  });
+
+  // update team
+  const tRef = db.collection('teams').doc(team);
+  const tdoc = await tRef.get();
+  const tdata = tdoc.data();
+  const newPurse = tdata.purse - finalBid;
+
+  await tRef.update({
+    purse: newPurse,
+    players: firebase.firestore.FieldValue.arrayUnion(playerId)
+  });
+
+  // reset auction
+  await ref.set({
+    playerID: null,
+    currentBid: 0,
+    highestBidder: null,
+    interestedTeams: [],
+    status: "NOT_STARTED"
+  });
+
+const pSnap = await db.collection("players").doc(playerId).get();
+const playerName = pSnap.data().name;
+
+logAction(`SOLD ${playerName} to ${team} for ₹${formatBasePrice(finalBid)}`);
+
+
+
+  loadPlayers();
+  loadTeams();
+}
+async function markUnsold(auto = false) {
+  const ref = db.collection("auction").doc("current");
+  const snap = await ref.get();
+  const data = snap.data();
+
+  if (!data.playerID) return;
+
+  const playerId = data.playerID;
+
+  const pSnap = await db.collection("players").doc(playerId).get();
+  const playerName = pSnap.data().name;
+
+  // Reset player
+  await db.collection("players").doc(playerId).update({
+    soldTo: null,
+    soldPrice: null
+  });
+
+  // Reset auction
+  await ref.set({
+    playerID: null,
+    currentBid: 0,
+    highestBidder: null,
+    interestedTeams: [],
+    status: "NOT_STARTED"
+  });
+
+  if (auto) {
+    logAction(`⏳ Auto-UNSOLD: ${playerName} returned to auction pool`);
+  } else {
+    logAction(`UNSOLD: ${playerName} returned to auction pool`);
+  }
+
+  loadPlayers();
+}
+
+/* ---------------------------
+   INITIAL LOAD 
+--------------------------- */
+loadPlayers();
+loadTeams();
+loadAllPlayersForSearch();
+
+</script>
+
+</body>
+</html> 

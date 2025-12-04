@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Mock IPL Auction - Login</title>
+  <style>
+    body { margin:0; height:100vh; display:flex; align-items:center; justify-content:center;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg,#001f3f,#0057b8); }
+    .card { width:380px; padding:28px; border-radius:14px;
+      background: rgba(255,255,255,0.12); box-shadow:0 8px 40px rgba(0,0,0,.2);
+      backdrop-filter: blur(8px); color:#fff; text-align:center; }
+    h1{ margin:0 0 12px; color:#ffd700; font-size:26px;}
+    input { width:90%; padding:10px; margin:8px 0; border-radius:8px; border:none; }
+    button { width:95%; padding:12px; margin-top:8px; border-radius:8px; border:none; background:#ffca2c; font-weight:700; cursor:pointer;}
+    #msg{ min-height:20px; margin-top:10px; font-size:14px; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Mock IPL Auction</h1>
+
+    <div id="auth-area">
+      <input id="email" placeholder="Email" type="email" />
+      <input id="password" type="password" placeholder="Password" />
+
+      <button id="loginBtn">Login</button>
+      <p id="msg"></p>
+    </div>
+
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  <script src="firebase.js"></script>
+
+ <script>
+  const emailEl = document.getElementById("email");
+  const passwordEl = document.getElementById("password");
+  const loginBtn = document.getElementById("loginBtn");
+  const msg = document.getElementById("msg");
+
+function showMsg(text, color="white") {
+    msg.style.color = color;
+    msg.innerText = text;
+
+    // Auto-hide after 3 sec
+    setTimeout(() => {
+        msg.innerText = "";
+    }, 3000);
+}
+
+
+  loginBtn.addEventListener("click", async () => {
+    const email = emailEl.value.trim();
+    const pw = passwordEl.value.trim();
+
+    if (!email || !pw) return showMsg("Enter email & password", "orange");
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, pw);
+
+      // MAP EMAIL → TEAM NAME
+      let team = "";
+
+      switch(email.toLowerCase()) {
+        case "csk@gmail.com": team = "CSK"; break;
+        case "mi@gmail.com": team = "MI"; break;
+        case "rcb@gmail.com": team = "RCB"; break;
+        case "kkr@gmail.com": team = "KKR"; break;
+        case "srh@gmail.com": team = "SRH"; break;
+        case "dc@gmail.com": team = "DC"; break;
+        case "rr@gmail.com": team = "RR"; break;
+        case "gt@gmail.com": team = "GT"; break;
+        case "lsg@gmail.com": team = "LSG"; break;
+        case "pk@gmail.com": team = "PBKS"; break;
+
+        // ADMIN IN NEW TAB
+        case "admin@gmail.com":
+            window.open("admin.html", "_blank");
+            return;
+      }
+
+      if (team === "") return showMsg("This email isn't linked to a team!", "red");
+
+      // SAVE TEAM NAME
+      localStorage.setItem("team", team);
+
+      // OPEN TEAM DASHBOARD IN NEW TAB
+      window.open("team.html", "_blank");
+
+      // Optional: show login message in current tab
+      showMsg("Login successful! Team page opened.", "lightgreen");
+
+    } catch (e) {
+      showMsg(e.message, "tomato");
+    }
+  });
+</script>
+
+</body>
+</html>

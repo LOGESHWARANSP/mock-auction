@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IPL Mega Auction 2026 - Live Viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #0b0f1d;
+        --card: #141b33;
+        --border: #1f2a48;
+        --text: #e2e8f0;
+        --accent: #4cb3ff;
+        --green: #00ff88;
+        --gold: #ffd700;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--text); font-family:'Poppins',sans-serif; padding:20px; }
+    .container { max-width:1600px; margin:auto; }
+
+    h1 { text-align:center; font-size:3em; color:var(--accent); margin-bottom:10px; }
+    .subtitle { text-align:center; color:#94a3b8; margin-bottom:30px; }
+
+    /* CURRENT PLAYER */
+    #currentBox {
+        background:linear-gradient(135deg,#1e293b,#141b33);
+        padding:30px; border-radius:16px; border:2px solid var(--accent);
+        display:flex; gap:35px; align-items:center; margin-bottom:40px;
+    }
+    #currentBox img {
+        width:180px; height:180px; object-fit:cover; border-radius:12px; border:4px solid var(--accent);
+    }
+    .current-info h2 { font-size:2.4em; color:var(--gold); margin-bottom:12px; }
+    .current-info p { font-size:1.3em; margin:10px 0; }
+    .bid { font-size:2.4em; color:var(--green); font-weight:700; }
+
+    /* TEAMS TABLE */
+    .table {
+        width:100%; border-collapse:collapse; margin:30px 0; background:var(--card);
+        border-radius:12px; overflow:hidden;
+    }
+    .table th {
+        background:#1e293b; padding:18px; text-align:left; color:var(--accent); font-size:1.1em;
+    }
+    .table td { padding:16px 18px; border-bottom:1px solid var(--border); }
+    .purse { color:var(--green); font-weight:600; }
+
+    /* SQUADS */
+    .squad-grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));
+        gap:25px;
+        margin-top:40px;
+    }
+    .squad-card {
+        background:var(--card); border-radius:14px; padding:22px; border:1px solid var(--border);
+    }
+    .squad-header {
+        display:flex; align-items:center; gap:15px;
+        margin-bottom:20px; padding-bottom:12px; border-bottom:2px solid var(--accent);
+    }
+    .squad-header img {
+        width:60px; height:60px; border-radius:50%; border:3px solid white;
+    }
+    .squad-header h3 { font-size:1.7em; color:var(--accent); }
+    .purse-left { margin-left:auto; font-size:1.2em; color:var(--green); font-weight:600; }
+    .role-group h4 { color:#94a3b8; margin:18px 0 10px; }
+    .player-item {
+        background:rgba(255,255,255,0.06); padding:12px;
+        border-radius:10px; margin:8px 0;
+        display:flex; justify-content:space-between;
+    }
+    .price-tag {
+        background:#22c55e; padding:6px 12px; border-radius:8px;
+        font-weight:600; color:white;
+    }
+
+    /* ACTION LOG */
+    #log {
+        max-height:220px; overflow-y:auto;
+        border:1px solid #1f2a48; padding:12px;
+        background:#141b33; border-radius:12px;
+        margin-top:40px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>IPL Mega Auction 2026</h1>
+    <p class="subtitle">Live • Real-time Viewer Dashboard</p>
+
+    <!-- CURRENT PLAYER -->
+    <div id="currentBox">
+        <img id="cpImg" src="ipl.jpg" alt="player">
+        <div class="current-info">
+            <h2 id="cpName">Waiting for next player…</h2>
+            <p><strong>Current Bid:</strong> ₹ <span class="bid" id="cpBid">-</span></p>
+            <p><strong>Highest Bidder:</strong> <span id="cpHigh" style="color:var(--gold);font-weight:600;">-</span></p>
+            <p><strong>Interested Teams:</strong> <span id="cpInt">-</span></p>
+        </div>
+    </div>
+
+    <!-- TEAMS TABLE -->
+    <h2 style="color:var(--accent); margin-top:40px;">Teams & Remaining Purse</h2>
+
+    <table class="table" id="teamsTable">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Purse (₹)</th>
+                <th>Players</th>
+                <th>Overseas</th>
+                <th>Indians</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- LIVE SQUADS -->
+    <h2 style="color:var(--accent); margin-top:50px;">Live Team Squads</h2>
+    <div id="squads" class="squad-grid"></div>
+
+    <h2 style="color:#4cb3ff; margin-top:50px;">Action Log</h2>
+    <div id="log"></div>
+
+</div>
+
+<!-- ===== CORRECT FIREBASE V8 IMPORT ORDER (DO NOT MIX V9) ===== -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<!-- your firebase config file (must define firebase.initializeApp(...) and const db = firebase.firestore();) -->
+<script src="firebase.js"></script>
+
+<script>
+    function formatBasePrice(amount) {
+  if (amount >= 10000000) {
+    return (amount / 10000000) + " Cr";   // 1 Cr, 2 Cr
+  } else {
+    return (amount / 100000) + " L";      // 30 L, 50 L
+  }
+}
+
+const TEAM_LOGOS = {
+    CSK:"csk.png", MI:"mi.jpg", RCB:"rcb.jpg", KKR:"kkr.jpg", RR:"rr.jpg",
+    SRH:"srh.jpg", DC:"dc.png", LSG:"lsg.jpg", GT:"gt.jpg", PBKS:"pk.jpg"
+};
+
+const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
+
+/* =========================================================
+   CURRENT PLAYER LISTENER  (COPIED FROM admin.html)
+========================================================= */
+db.collection("auction").doc("current").onSnapshot(async snap => {
+    const data = snap.data() || {};
+
+    if (!data.playerID) {
+        document.getElementById("cpImg").src = "ipl.jpg";
+        document.getElementById("cpName").innerText = "Waiting for next player…";
+        document.getElementById("cpBid").innerText = "-";
+        document.getElementById("cpHigh").innerText = "-";
+        document.getElementById("cpInt").innerText = "-";
+        return;
+    }
+
+    const pSnap = await db.collection("players").doc(data.playerID).get();
+    const p = pSnap.exists ? pSnap.data() : null;
+
+    document.getElementById("cpImg").src = (p && p.imageUrl) ? p.imageUrl : "ipl.jpg";
+    document.getElementById("cpName").innerText = p ? p.name : data.playerID;
+document.getElementById("cpBid").innerText = formatBasePrice(data.currentBid);
+
+    document.getElementById("cpHigh").innerText = data.highestBidder || "-";
+    document.getElementById("cpInt").innerText = (data.interestedTeams || []).join(", ") || "-";
+});
+
+
+/* =========================================================
+   TEAMS TABLE (admin-style, ordered, stable)
+========================================================= */
+db.collection("teams").onSnapshot(async snap => {
+    const tbody = document.querySelector("#teamsTable tbody");
+    tbody.innerHTML = "";
+
+    const teamMap = {};
+    snap.docs.forEach(doc => teamMap[doc.id] = { id: doc.id, data: doc.data() });
+
+    for (const teamId of REAL_TEAMS) {
+        const docObj = teamMap[teamId];
+        const team = docObj ? docObj.data : null;
+
+        if (!team) {
+            tbody.innerHTML += `
+                <tr>
+                    <td><strong>${teamId}</strong></td>
+                    <td class="purse">₹ 0.00 Cr</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>`;
+            continue;
+        }
+
+        // ensure players is array
+        const players = Array.isArray(team.players) ? team.players : [];
+
+        let overseas = 0, indians = 0;
+        for (const pid of players) {
+            const pSnap = await db.collection("players").doc(pid).get();
+            const p = pSnap.exists ? pSnap.data() : null;
+            if (!p || !p.country || p.country === "India") indians++;
+            else overseas++;
+        }
+
+        tbody.innerHTML += `
+            <tr>
+                <td><strong>${teamId}</strong></td>
+          <td class="purse">₹ ${formatBasePrice(team.purse)}</td>
+
+                <td>${players.length} / 25</td>
+                <td style="color:#00ff88">${overseas} / 8</td>
+                <td>${indians}</td>
+            </tr>`;
+    }
+});
+
+
+/* =========================================================
+   LIVE SQUADS (admin-style)
+========================================================= */
+db.collection("teams").onSnapshot(async snap => {
+    const container = document.getElementById("squads");
+    container.innerHTML = "";
+
+    const teamMap = {};
+    snap.docs.forEach(d => teamMap[d.id] = d.data());
+
+    for (const teamId of REAL_TEAMS) {
+        const team = teamMap[teamId] || { players: [], purse:0 };
+        const players = Array.isArray(team.players) ? team.players : [];
+
+        let batsmen="", bowlers="", allround="", wk="";
+
+        for (const pid of players) {
+            const pSnap = await db.collection("players").doc(pid).get();
+            if (!pSnap.exists) continue;
+            const p = pSnap.data();
+
+            const card = `
+                <div class="player-item">
+                    <div><strong>${p.name}</strong><br><small>${p.country}</small></div>
+                    <div class="price-tag">₹ ${formatBasePrice(p.soldPrice || 0)}</div>
+
+
+                </div>`;
+
+            const role = (p.role || "").toLowerCase();
+            if (role.includes("bat")) batsmen += card;
+            else if (role.includes("bowl")) bowlers += card;
+            else if (role.includes("all")) allround += card;
+            else wk += card;
+        }
+
+        container.innerHTML += `
+            <div class="squad-card">
+                <div class="squad-header">
+                    <img src="${TEAM_LOGOS[teamId] || 'ipl.jpg'}" alt="${teamId}">
+                    <h3>${teamId}</h3>
+                    <div class="purse-left">₹ ${formatBasePrice(team.purse)}</div>
+
+                </div>
+
+                <div class="role-group"><h4>Batsmen</h4>${batsmen || "<p>None</p>"}</div>
+                <div class="role-group"><h4>Bowlers</h4>${bowlers || "<p>None</p>"}</div>
+                <div class="role-group"><h4>All-Rounders</h4>${allround || "<p>None</p>"}</div>
+                <div class="role-group"><h4>Wicket-Keepers</h4>${wk || "<p>None</p>"}</div>
+            </div>`;
+    }
+});
+
+
+/* =========================================================
+   ACTION LOG
+========================================================= */
+db.collection("logs")
+    .orderBy("ts", "desc")
+    .limit(50)
+    .onSnapshot(snap => {
+        const logBox = document.getElementById("log");
+        logBox.innerHTML = "";
+        snap.forEach(doc => {
+            const d = doc.data();
+            const ts = new Date(d.ts);
+            logBox.innerHTML += `<div>[${ts.toLocaleTimeString()}] ${d.text}</div>`;
+        });
+    });
+
+</script>
+
+</body>
+</html>

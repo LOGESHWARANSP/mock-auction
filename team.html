@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Team Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="card" style="width:820px; margin:auto;">
+
+  <!-- HEADER -->
+  <div style="display:flex;align-items:center;gap:15px;margin-bottom:15px;">
+      <img id="teamLogo" src="default-player.png"
+           style="width:70px;height:70px;border-radius:8px;object-fit:cover;">
+      <h2 id="teamTitle" style="margin:0;">Team Dashboard</h2>
+  </div>
+
+  <p><strong>Purse:</strong> <span id="purse">-</span></p>
+  <div id="myPlayers" style="display:none;"></div>
+
+  <!-- SQUAD -->
+  <h3>Your Squad</h3>
+
+  <div style="display:flex;gap:20px;flex-wrap:wrap;">
+
+    <div style="flex:1;">
+      <h4>Batsmen</h4>
+      <div id="batList" class="roleBox"></div>
+    </div>
+
+    <div style="flex:1;">
+      <h4>Bowlers</h4>
+      <div id="bowlList" class="roleBox"></div>
+    </div>
+
+    <div style="flex:1;">
+      <h4>All Rounders</h4>
+      <div id="arList" class="roleBox"></div>
+    </div>
+
+    <div style="flex:1;">
+      <h4>Wicket Keepers</h4>
+      <div id="wkList" class="roleBox"></div>
+    </div>
+
+  </div>
+
+  <!-- CURRENT PLAYER -->
+  <h3 style="margin-top:30px;">🔥 Current Player</h3>
+
+  <div id="live-panel" style="border:1px solid #ddd;padding:12px;border-radius:8px;">
+    <img id="pImg" src="default-player.png"
+         style="width:130px;height:130px;object-fit:cover;border-radius:8px;">
+    
+    <p><b>Name:</b> <span id="pName">-</span></p>
+    <p><b>Role:</b> <span id="pRole">-</span></p>
+    <p><b>Country:</b> <span id="pCountry">-</span></p>
+    <p><b>Base Price:</b> ₹ <span id="basePrice">-</span></p>
+    <p><b>Current Bid:</b> ₹ <span id="pBid">-</span></p>
+    <p><b>Highest Bidder:</b> <span id="highest">-</span></p>
+    <p><b>Teams Interested:</b> <span id="interest">-</span></p>
+
+    <button id="bidBtn"> BID</button>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script src="firebase.js"></script>
+<script src="team.js?v=3"></script>
+
+
+</body>
+</html>
