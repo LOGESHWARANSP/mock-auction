@@ -183,10 +183,25 @@ function clearAuctionUI() {
 document.getElementById("bidBtn").onclick = async () => {
   if (!currentAuction) return;
 
-  const increment = getIncrement(currentAuction.currentBid);
-  const newBid = currentAuction.currentBid + increment;
+  const ref = db.collection("auction").doc("current");
+  const snap = await ref.get();
+  const data = snap.data();
 
-  await db.collection("auction").doc("current").update({
+  // 1️⃣ FIRST BID → DO NOT INCREASE
+  if (!data.highestBidder) {
+    await ref.update({
+      highestBidder: TEAM_NAME,
+      interestedTeams: firebase.firestore.FieldValue.arrayUnion(TEAM_NAME)
+    });
+    console.log("First bid placed at base price");
+    return;
+  }
+
+  // 2️⃣ Subsequent bids → apply increment
+  const increment = getIncrement(data.currentBid);
+  const newBid = data.currentBid + increment;
+
+  await ref.update({
     currentBid: newBid,
     highestBidder: TEAM_NAME,
     interestedTeams: firebase.firestore.FieldValue.arrayUnion(TEAM_NAME)
@@ -194,6 +209,7 @@ document.getElementById("bidBtn").onclick = async () => {
 
   console.log("Bid:", formatBasePrice(newBid));
 };
+
 
 
 /* ---------------------------------------------------

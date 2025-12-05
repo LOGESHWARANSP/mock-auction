@@ -186,6 +186,66 @@ button:hover {
         align-self: flex-start;
     }
 }
+/* -------- MOBILE FIXES -------- */
+@media (max-width: 768px) {
+
+  /* Reduce title size */
+  h1 {
+    font-size: 1.8rem !important;
+    text-align: center;
+  }
+
+  /* Player card container */
+  .player-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+
+  /* Player image */
+  .player-img {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  /* Player info box */
+  .player-info {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  /* Waiting text */
+  .status-text {
+    font-size: 1.3rem !important;
+    text-align: center;
+  }
+
+  /* Table responsive */
+  table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    border-spacing: 0;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  /* Container padding */
+  .container {
+    padding: 10px;
+  }
+
+  /* Make things centered */
+  * {
+    text-align: center;
+  }
+}
+
 
 
 

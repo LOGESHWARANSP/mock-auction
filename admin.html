@@ -342,7 +342,8 @@ document.getElementById("resetAllBtn").onclick = async function () {
 
   try {
     const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
-    const INITIAL_PURSE = 1200000000;
+    const INITIAL_PURSE = 1250000000; // 125 Cr
+
 
 
     // 1️⃣ Delete invalid teams
@@ -500,32 +501,29 @@ function loadPlayers() {
    LOAD TEAMS 
 --------------------------- */
 
-function loadTeams() {
+let teamsListener = null;
 
+function loadTeams() {
   const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
 
-  db.collection("teams").onSnapshot(async snap => {
+  // ❗ Prevent multiple snapshot listeners
+  if (teamsListener) return;
 
+  teamsListener = db.collection("teams").onSnapshot(async snap => {
     const tbody = document.querySelector('#teamsTable tbody');
-    tbody.innerHTML = "";  // clear once ONLY
+    tbody.innerHTML = "";  // clear old rows
 
-    // Create map for fast access
     const teamMap = {};
     snap.docs.forEach(d => teamMap[d.id] = d.data());
 
     for (const teamId of REAL_TEAMS) {
-     const t = teamMap[teamId] || { purse: 1200000000, players: [] };
-
-
+      const t = teamMap[teamId] || { purse: 1200000000, players: [] };
       const players = t.players || [];
 
       let overseasCount = 0;
       for (const pid of players) {
         const pSnap = await db.collection("players").doc(pid).get();
-        if (pSnap.exists) {
-          const p = pSnap.data();
-          if (p.country !== "India") overseasCount++;
-        }
+        if (pSnap.exists && pSnap.data().country !== "India") overseasCount++;
       }
 
       const indianCount = players.length - overseasCount;
@@ -534,16 +532,14 @@ function loadTeams() {
         <tr>
           <td>${teamId}</td>
           <td>${formatBasePrice(t.purse)}</td>
-
-
           <td>${players.length} / 25</td>
           <td>${overseasCount} / 8</td>
           <td>${indianCount}</td>
         </tr>`;
     }
-
   });
 }
+
 
 
 

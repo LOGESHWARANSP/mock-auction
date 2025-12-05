@@ -170,7 +170,8 @@ async function cancelAuction() {
 }
 document.getElementById("resetTeamsBtn").onclick = async function () {
   const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
-const INITIAL_PURSE = 1200000000; // 120 Cr
+const INITIAL_PURSE = 1250000000; // 125 Cr
+
 
 
   const msg = document.getElementById("resetMsg");
