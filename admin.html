@@ -132,6 +132,9 @@
 <!-- ============================ -->
 
 <script>
+  let unsubscribeTeams = null;   // <-- ADD HERE (Top of script)
+let unsubscribePlayers = null; // <-- For players too (optional but recommended)
+
   function formatBasePrice(amount) {
   if (amount >= 10000000) {
     return (amount / 10000000) + " Cr";   // 1 Cr, 2 Cr, etc.
@@ -393,9 +396,9 @@ setTimeout(() => {
 }, 3000);
 
 
-    loadTeams();
+    
     loadPlayers();
-
+    loadTeams();
   } catch (err) {
     msg.style.color = "tomato";
     msg.innerText = "Error: " + err.message;
@@ -501,44 +504,45 @@ function loadPlayers() {
    LOAD TEAMS 
 --------------------------- */
 
-let teamsListener = null;
+
+
+let teamsUnsub = null;
 
 function loadTeams() {
-  const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
+    const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
 
-  // ❗ Prevent multiple snapshot listeners
-  if (teamsListener) return;
+    // Prevent duplicate listeners
+    if (teamsUnsub) return;  
 
-  teamsListener = db.collection("teams").onSnapshot(async snap => {
-    const tbody = document.querySelector('#teamsTable tbody');
-    tbody.innerHTML = "";  // clear old rows
+    teamsUnsub = db.collection("teams").onSnapshot(async snap => {
+        const tbody = document.querySelector('#teamsTable tbody');
+        tbody.innerHTML = "";
 
-    const teamMap = {};
-    snap.docs.forEach(d => teamMap[d.id] = d.data());
+        const teamMap = {};
+        snap.docs.forEach(d => teamMap[d.id] = d.data());
 
-    for (const teamId of REAL_TEAMS) {
-      const t = teamMap[teamId] || { purse: 1200000000, players: [] };
-      const players = t.players || [];
+        for (const teamId of REAL_TEAMS) {
+            const t = teamMap[teamId] || { purse: 1250000000, players: [] };
+            const players = t.players || [];
 
-      let overseasCount = 0;
-      for (const pid of players) {
-        const pSnap = await db.collection("players").doc(pid).get();
-        if (pSnap.exists && pSnap.data().country !== "India") overseasCount++;
-      }
+            let overseas = 0;
+            for (const pid of players) {
+                const ps = await db.collection("players").doc(pid).get();
+                if (ps.exists && ps.data().country !== "India") overseas++;
+            }
 
-      const indianCount = players.length - overseasCount;
-
-      tbody.innerHTML += `
-        <tr>
-          <td>${teamId}</td>
-          <td>${formatBasePrice(t.purse)}</td>
-          <td>${players.length} / 25</td>
-          <td>${overseasCount} / 8</td>
-          <td>${indianCount}</td>
-        </tr>`;
-    }
-  });
+            tbody.innerHTML += `
+                <tr>
+                    <td>${teamId}</td>
+                    <td>${formatBasePrice(t.purse)}</td>
+                    <td>${players.length} / 25</td>
+                    <td>${overseas} / 8</td>
+                    <td>${players.length - overseas}</td>
+                </tr>`;
+        }
+    });
 }
+
 
 
 
@@ -715,7 +719,7 @@ logAction(`SOLD ${playerName} to ${team} for ₹${formatBasePrice(finalBid)}`);
 
 
   loadPlayers();
-  loadTeams();
+  
 }
 async function markUnsold(auto = false) {
   const ref = db.collection("auction").doc("current");
@@ -757,7 +761,6 @@ async function markUnsold(auto = false) {
    INITIAL LOAD 
 --------------------------- */
 loadPlayers();
-loadTeams();
 loadAllPlayersForSearch();
 
 </script>
