@@ -88,6 +88,9 @@
 </head>
 
 <body>
+    <audio id="bidSound" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg"></audio>
+<audio id="soldSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+
 
 <div class="container">
 
@@ -147,6 +150,30 @@
     return (amount / 100000) + " L";      // 30 L, 50 L
   }
 }
+// SOUND FILES
+
+
+// PLAY SOUND FUNCTIONS
+function playBidSound() {
+    let audio = document.getElementById("bidSound");
+    audio.currentTime = 0;
+    audio.play().catch(()=>{});
+}
+
+function playSoldSound() {
+    let audio = document.getElementById("soldSound");
+    audio.currentTime = 0;
+    audio.play().catch(()=>{});
+}
+document.body.addEventListener("click", () => {
+    document.getElementById("bidSound").muted = false;
+    document.getElementById("soldSound").muted = false;
+}, { once:true });
+
+
+
+
+
 
 const TEAM_LOGOS = {
     CSK:"csk.png", MI:"mi.jpg", RCB:"rcb.jpg", KKR:"kkr.jpg", RR:"rr.jpg",
@@ -158,6 +185,8 @@ const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
 /* =========================================================
    CURRENT PLAYER LISTENER  (COPIED FROM admin.html)
 ========================================================= */
+
+
 db.collection("auction").doc("current").onSnapshot(async snap => {
     const data = snap.data() || {};
 
@@ -171,15 +200,16 @@ db.collection("auction").doc("current").onSnapshot(async snap => {
     }
 
     const pSnap = await db.collection("players").doc(data.playerID).get();
-    const p = pSnap.exists ? pSnap.data() : null;
+    const p = pSnap.data();
 
-    document.getElementById("cpImg").src = (p && p.imageUrl) ? p.imageUrl : "ipl.jpg";
-    document.getElementById("cpName").innerText = p ? p.name : data.playerID;
-document.getElementById("cpBid").innerText = formatBasePrice(data.currentBid);
-
-    document.getElementById("cpHigh").innerText = data.highestBidder || "-";
-    document.getElementById("cpInt").innerText = (data.interestedTeams || []).join(", ") || "-";
+    document.getElementById("cpImg").src = p.imageUrl || "ipl.jpg";
+    document.getElementById("cpName").innerText = p.name;
+    document.getElementById("cpBid").innerText = formatBasePrice(data.currentBid);
+    document.getElementById("cpHigh").innerText = data.highestBidder;
+    document.getElementById("cpInt").innerText = (data.interestedTeams || []).join(", ");
 });
+
+
 
 
 /* =========================================================

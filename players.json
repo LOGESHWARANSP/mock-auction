@@ -84,9 +84,16 @@
   { "id": "p073", "name": "P Saravana Kumar", "role": "Bowler", "country": "India", "basePrice": 3000000 },
   { "id": "p074", "name": "Prabhsimran Singh", "role": "Wicket Keeper", "country": "India", "basePrice": 5000000 },
   { "id": "p075", "name": "Pulkit Narang", "role": "Bowler", "country": "India", "basePrice": 3000000 },
+{
+  "id": "p076",
+  "name": "Venkatesh Iyer",
+  "role": "All Rounder",
+  "country": "India",
+  "basePrice": 5000000
+},
 
   { "id": "p077", "name": "R Samarth", "role": "Batsman", "country": "India", "basePrice": 3000000 },
-  { "id": "p078", "name": "Ramandeep Singh", "role": "All Rounder", "country": "India", "basePrice": 4000000 },
+
   { "id": "p079", "name": "Rohan Kadam", "role": "Batsman", "country": "India", "basePrice": 3000000 },
   { "id": "p080", "name": "Sachin Baby", "role": "Batsman", "country": "India", "basePrice": 3000000 },
 
@@ -116,6 +123,13 @@
   { "id": "p101", "name": "Shivam Dube", "role": "All Rounder", "country": "India", "basePrice": 5000000 },
   { "id": "p102", "name": "Washington Sundar", "role": "All Rounder", "country": "India", "basePrice": 10000000 },
   { "id": "p103", "name": "Navdeep Saini", "role": "Bowler", "country": "India", "basePrice": 5000000 },
+  {
+  "id": "p104",
+  "name": "Shashank Singh",
+  "role": "All Rounder",
+  "country": "India",
+  "basePrice": 2000000
+},
 
   { "id": "p105", "name": "Umran Malik", "role": "Bowler", "country": "India", "basePrice": 10000000 },
 
@@ -323,6 +337,25 @@
   { "id": "p293", "name": "Dilshan Madushanka", "role": "Bowler", "country": "Sri Lanka", "basePrice": 8000000 },
  
   
+{
+  "id": "p294",
+  "name": "Shreyas Gopal",
+  "role": "All Rounder",
+  "country": "India",
+  "basePrice": 10000000,
+  "soldTo": null,
+  "soldPrice": null
+},
+{
+  "id": "p295",
+  "name": "Gurjapneet Singh",
+  "role": "Bowler",
+  "country": "India",
+  "basePrice": 10000000,
+  "soldTo": null,
+  "soldPrice": null,
+  "imageUrl": "gurjapneet_singh.jpg"
+},
 
  
   { "id": "p297", "name": "Kusal Mendis", "role": "Wicket Keeper", "country": "Sri Lanka", "basePrice": 10000000 },
@@ -835,13 +868,6 @@
     "basePrice": 5000000
   },
   {
-    "id": "p452",
-    "name": "Pyla Avinash",
-    "role": "Batsman",
-    "country": "India",
-    "basePrice": 3000000
-  },
-  {
     "id": "p453",
     "name": "Priyansh Arya",
     "role": "Batsman",
@@ -883,13 +909,7 @@
     "country": "England",
     "basePrice": 5000000
   },
-  {
-    "id": "p460",
-    "name": "Nuwan Thushara",
-    "role": "Bowler",
-    "country": "Sri Lanka",
-    "basePrice": 10000000
-  },
+ 
   {
     "id": "p461",
     "name": "Swapnil Singh",
@@ -932,6 +952,14 @@
   "country": "India",
   "basePrice": 5000000
 },
+{
+  "id": "p477",
+  "name": "Smaran Ravichandran",
+  "role": "Batsman",
+  "country": "India",
+  "basePrice": 3000000
+},
+
   { "id": "p501", "name": "Ayush Mhatre", "role": "Batsman", "country": "India", "basePrice": 3000000 },
   { "id": "p502", "name": "Dewald Brevis", "role": "All Rounder", "country": "South Africa", "basePrice": 3000000 },
   { "id": "p503", "name": "Urvil Patel", "role": "Wicket Keeper", "country": "India", "basePrice": 3000000 },

@@ -358,13 +358,23 @@ document.getElementById("resetAllBtn").onclick = async function () {
     }
 
     // 2️⃣ Reset official teams
-    for (const t of REAL_TEAMS) {
-      await db.collection("teams").doc(t).set({
-        name: t,
-        purse: INITIAL_PURSE,
-        players: []
-      }, { merge:true });
-    }
+   // 2️⃣ Reset official teams (DO NOT TOUCH PLAYERS FIELD)
+// 2️⃣ Reset official teams
+for (const t of REAL_TEAMS) {
+
+  // 🔥 FIRST remove players field completely
+  await db.collection("teams").doc(t).update({
+    players: firebase.firestore.FieldValue.delete()
+  });
+
+  // 🔥 THEN reset purse + name (no players field recreated)
+  await db.collection("teams").doc(t).set({
+    name: t,
+    purse: INITIAL_PURSE
+  }, { merge:true });
+}
+
+
 
     // 3️⃣ Reset all players (remove sold)
     const playerSnap = await db.collection("players").get();

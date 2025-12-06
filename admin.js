@@ -157,7 +157,14 @@ async function markSold() {
   });
 
   // clear current auction
-  await ref.set({ playerID: null, currentBid: 0, highestBidder: null, interestedTeams: [], status: 'NOT_STARTED' });
+await ref.update({
+    playerID: null,
+    currentBid: 0,
+    highestBidder: null,
+    interestedTeams: [],
+    status: "SOLD"
+});
+
 
   logAction(`SOLD ${playerId} to ${team} for ₹${formatBasePrice(finalBid)}`);
 
@@ -170,9 +177,7 @@ async function cancelAuction() {
 }
 document.getElementById("resetTeamsBtn").onclick = async function () {
   const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
-const INITIAL_PURSE = 1250000000; // 125 Cr
-
-
+  const INITIAL_PURSE = 1250000000; // 125 Cr
 
   const msg = document.getElementById("resetMsg");
   msg.innerText = "Resetting… please wait.";
@@ -180,38 +185,40 @@ const INITIAL_PURSE = 1250000000; // 125 Cr
   try {
     const teamsRef = db.collection("teams");
 
-    // 1. Fetch all teams
+    // DELETE old invalid teams
     const snaps = await teamsRef.get();
-
-    // 2. Delete invalid teams
     for (const doc of snaps.docs) {
       if (!REAL_TEAMS.includes(doc.id)) {
         await teamsRef.doc(doc.id).delete();
-        console.log("Deleted invalid:", doc.id);
       }
     }
 
-    // 3. Reset valid teams
-    for (const t of REAL_TEAMS) {
-      await teamsRef.doc(t).set({
-        name: t,
-        purse: INITIAL_PURSE,
-        players: [],
-        teamLogo: `${t.toLowerCase()}.png`
-      }, { merge: true });
+    // RESET valid teams (NO players ARRAY!)
+    // 2️⃣ Reset official teams
+for (const t of REAL_TEAMS) {
 
-      console.log("Reset", t);
-    }
+  // 🔥 FIRST remove players field completely
+  await db.collection("teams").doc(t).update({
+    players: firebase.firestore.FieldValue.delete()
+  });
+
+  // 🔥 THEN reset purse + name (no players field recreated)
+  await db.collection("teams").doc(t).set({
+    name: t,
+    purse: INITIAL_PURSE
+  }, { merge:true });
+}
+
 
     msg.style.color = "#00ff9d";
-    msg.innerText = "✔ All 10 teams reset to 90 Cr!";
+    msg.innerText = "✔ Teams reset successfully!";
 
   } catch (err) {
     msg.style.color = "tomato";
     msg.innerText = "Error: " + err.message;
-    console.error(err);
   }
 };
+
 function getPlayerCategory(country) {
   if (!country) return "India"; // default
   
@@ -226,9 +233,6 @@ function getPlayerCategory(country) {
 
 
 
-// initial load bindings (if admin page uses these buttons)
-const seedBtn = document.getElementById('seedBtn');
-if(seedBtn) seedBtn.addEventListener('click', seedSampleData);
 
 // initial data load
 loadPlayers();

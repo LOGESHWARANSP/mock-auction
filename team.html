@@ -73,7 +73,38 @@
 
 <script src="firebase.js"></script>
 <script src="team.js?v=3"></script>
+<script>
+ db.collection("auction").doc("current").onSnapshot(async snap => {
+    if (!snap.exists) return;
 
+    const data = snap.data();
+
+    // If no player active → clear UI
+    if (!data.playerID) {
+        document.getElementById("pName").innerText = "-";
+        document.getElementById("pRole").innerText = "-";
+        document.getElementById("pCountry").innerText = "-";
+        document.getElementById("basePrice").innerText = "-";
+        document.getElementById("pBid").innerText = "-";
+        document.getElementById("highest").innerText = "-";
+        document.getElementById("interest").innerText = "-";
+        return;
+    }
+
+    // Load player
+    const pSnap = await db.collection("players").doc(data.playerID).get();
+    const p = pSnap.data();
+
+    document.getElementById("pName").innerText = p.name;
+    document.getElementById("pRole").innerText = p.role;
+    document.getElementById("pCountry").innerText = p.country;
+    document.getElementById("basePrice").innerText = formatPrice(p.basePrice);
+    document.getElementById("pBid").innerText = formatPrice(data.currentBid);
+    document.getElementById("highest").innerText = data.highestBidder || "-";
+    document.getElementById("interest").innerText = (data.interestedTeams || []).join(", ") || "-";
+});
+
+</script>
 
 </body>
 </html>

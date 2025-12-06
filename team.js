@@ -73,10 +73,11 @@ document.getElementById("teamLogo").src = TEAM_LOGOS[TEAM_NAME] || "default-play
 /* ---------------------------------------------------
    ENSURE TEAM EXISTS
 ---------------------------------------------------- */
+// Ensure team exists — DO NOT RESET PLAYERS
 db.collection("teams").doc(TEAM_NAME).set({
-  name: TEAM_NAME,
-  players: []
+  name: TEAM_NAME
 }, { merge: true });
+
 
 
 
@@ -128,8 +129,12 @@ function loadTeamInfo() {
 ---------------------------------------------------- */
 function listenToAuction() {
   db.collection("auction").doc("current").onSnapshot(async snap => {
-    const a = snap.data();
-    if (!a || !a.playerID) return clearAuctionUI();
+    const a = snap.data()|| {};
+    if (!a || !a.playerID) {
+    clearAuctionUI();
+    return;
+}
+
 
     currentAuction = a;
 
@@ -157,7 +162,7 @@ function listenToAuction() {
 
     // INTERESTED TEAMS LIST
     document.getElementById("interest").innerText =
-      (a.interestedTeams || []).join(", ") || "-";
+      (a.interestedTeams || []).join(", ") ;
   });
 }
 
