@@ -1,4 +1,6 @@
 let ALL_PLAYERS = [];
+let retainSearchLocked = false;
+
 
 async function loadAllPlayersForSearch() {
     const snap = await db.collection("players").get();
@@ -9,6 +11,7 @@ async function loadAllPlayersForSearch() {
 }
 
 document.getElementById("playerSearch").addEventListener("input", function () {
+   retainSearchLocked = true; 
     const q = this.value.toLowerCase().trim();
     const box = document.getElementById("searchResults");
 
@@ -148,6 +151,12 @@ db.collection("teams").doc(TEAM_NAME).set({
 ---------------------------------------------------- */
 function loadTeamInfo() {
   db.collection("teams").doc(TEAM_NAME).onSnapshot(async snap => {
+    const searchValue = document.getElementById("playerSearch").value;
+    if (retainSearchLocked) {
+    document.getElementById("playerSearch").value = searchValue;
+}
+
+
     const t = snap.data();
     if (!t) return;
 

@@ -232,6 +232,73 @@ function getPlayerCategory(country) {
 }
 
 
+document.getElementById("resetTeamBtn").onclick = async () => {
+    const team = document.getElementById("resetTeamSelect").value;
+    const msg = document.getElementById("resetTeamMsg");
+
+    if (!team) {
+        msg.style.color = "red";
+        msg.innerText = "Select a team to reset.";
+        return;
+    }
+
+    msg.style.color = "#ffd700";
+    msg.innerText = "Resetting team...";
+
+    const INITIAL_PURSE = 1250000000; // 125 Cr
+
+    try {
+        const tRef = db.collection("teams").doc(team);
+        const tSnap = await tRef.get();
+        const t = tSnap.data() || {};
+
+        const players = t.players || [];
+
+        // 1️⃣ Clear each player's sold status
+        for (const pid of players) {
+            await db.collection("players").doc(pid).update({
+                soldTo: null,
+                soldPrice: null
+            });
+        }
+
+        // 2️⃣ Reset the selected team's purse & players
+        await tRef.update({
+            purse: INITIAL_PURSE,
+            players: []
+        });
+
+        // 3️⃣ Add to logs
+        await db.collection("logs").add({
+            text: `Admin reset team ${team}`,
+            ts: Date.now()
+        });
+        // 4️⃣ Delete logs related to this team
+const logSnap = await db.collection("logs")
+    .where("text", ">=", `${team}`)
+    .where("text", "<=", `${team}\uf8ff`)
+    .get();
+
+logSnap.forEach(doc => doc.ref.delete());
+
+
+        msg.style.color = "#00ff88";
+        msg.innerText = `✔ ${team} reset successfully!`;
+        setTimeout(() => {
+    msg.innerText = "";
+}, 3000);   // 3 seconds
+
+
+        loadTeams();
+        loadPlayers();
+
+        setTimeout(() => msg.innerText = "", 3000);
+
+    } catch (err) {
+        msg.style.color = "tomato";
+        msg.innerText = "Error: " + err.message;
+    }
+};
 
 
 // initial data load

@@ -43,6 +43,26 @@
 
       <p id="resetMsg" style="color:#ccc;font-size:14px;margin-top:6px;"></p>
     </div>
+<h3>Reset Single Team</h3>
+
+<select id="resetTeamSelect" style="padding:8px; border-radius:6px;">
+  <option value="">-- Select Team --</option>
+  <option>CSK</option>
+  <option>DC</option>
+  <option>GT</option>
+  <option>KKR</option>
+  <option>LSG</option>
+  <option>MI</option>
+  <option>PBKS</option>
+  <option>RCB</option>
+  <option>RR</option>
+  <option>SRH</option>
+</select>
+
+<button id="resetTeamBtn">RESET TEAM</button>
+
+
+<p id="resetTeamMsg" style="margin-top:6px; color:#ccc;"></p>
 
     <!-- Players Table -->
     <h3>Players</h3>
@@ -801,6 +821,61 @@ async function markUnsold(auto = false) {
   }
 
   loadPlayers();
+}
+// FORCE-LINK THE BUTTON HANDLER
+document.getElementById("resetTeamBtn").onclick = resetSingleTeam;
+
+async function resetSingleTeam() {
+    const team = document.getElementById("resetTeamSelect").value;
+    const msg = document.getElementById("resetTeamMsg");
+
+    if (!team) {
+        msg.style.color = "red";
+        msg.innerText = "Select a team first.";
+        return;
+    }
+
+    msg.style.color = "yellow";
+    msg.innerText = "Resetting team...";
+
+    const INITIAL_PURSE = 1250000000;
+
+    try {
+        const tRef = db.collection("teams").doc(team);
+        const snap = await tRef.get();
+
+        const players = snap.exists ? snap.data().players || [] : [];
+
+        // Clear sold status for players
+        for (const pid of players) {
+            await db.collection("players").doc(pid).update({
+                soldTo: null,
+                soldPrice: null
+            });
+        }
+
+        // Reset team data
+        await tRef.update({
+            purse: INITIAL_PURSE,
+            players: []
+        });
+
+        // Log
+        await db.collection("logs").add({
+            text: `Admin reset team ${team}`,
+            ts: Date.now()
+        });
+
+        msg.style.color = "#00ff88";
+        msg.innerText = `✔ ${team} reset successfully!`;
+
+        loadTeams();
+        loadPlayers();
+
+    } catch (e) {
+        msg.style.color = "red";
+        msg.innerText = e.message;
+    }
 }
 
 /* ---------------------------
