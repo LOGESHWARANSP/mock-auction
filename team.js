@@ -1,6 +1,53 @@
-/* ---------------------------------------------------
-   PRICE FORMATTER → SAME AS ADMIN + VIEWER
----------------------------------------------------- */
+let ALL_PLAYERS = [];
+
+async function loadAllPlayersForSearch() {
+    const snap = await db.collection("players").get();
+    ALL_PLAYERS = snap.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));
+}
+
+document.getElementById("playerSearch").addEventListener("input", function () {
+    const q = this.value.toLowerCase().trim();
+    const box = document.getElementById("searchResults");
+
+    if (!q) {
+        box.style.display = "none";
+        return;
+    }
+
+    const results = ALL_PLAYERS.filter(p =>
+        p.name.toLowerCase().includes(q)
+    ).slice(0, 12);
+
+    let html = "";
+   results.forEach(p => {
+    html += `
+      <div onclick="selectRetainPlayer('${p.id}','${p.name}')"
+           style="
+             padding:8px;
+             cursor:pointer;
+             border-bottom:1px solid #eee;
+             color:black;
+             background:white;
+           ">
+         ${p.name} — ${p.role}
+      </div>
+    `;
+});
+
+
+    box.innerHTML = html;
+    box.style.display = "block";
+});
+
+function selectRetainPlayer(id, name) {
+    document.getElementById("retainPlayerId").value = id;
+    document.getElementById("playerSearch").value = name;
+    document.getElementById("searchResults").style.display = "none";
+}
+
 function formatBasePrice(amount) {
   if (!amount || isNaN(amount)) return "-";
 
@@ -10,6 +57,21 @@ function formatBasePrice(amount) {
   }
   // Lakhs
   return (amount / 100000) + " L";
+}
+function parsePrice(input) {
+  input = input.trim().toUpperCase();
+
+  if (input.endsWith("CR")) {
+    const num = parseFloat(input.replace("CR", "").trim());
+    return num * 10000000; // convert crores
+  }
+
+  if (input.endsWith("L")) {
+    const num = parseFloat(input.replace("L", "").trim());
+    return num * 100000; // convert lakhs
+  }
+
+  return NaN; // invalid
 }
 
 /* ---------------------------------------------------
@@ -214,6 +276,88 @@ document.getElementById("bidBtn").onclick = async () => {
 
   console.log("Bid:", formatBasePrice(newBid));
 };
+document.getElementById("retainBtn").onclick = async () => {
+  const pid = document.getElementById("retainPlayerId").value.trim();
+  const priceInput = document.getElementById("retainPrice").value.trim();
+  const msg = document.getElementById("retainMsg");
+
+  if (!pid) {
+    alert("Select a player first.");
+    return;
+  }
+
+  if (!priceInput) {
+    alert("Enter a retain price.");
+    return;
+  }
+
+  const price = parsePrice(priceInput);
+
+  // ❌ INVALID NUMBER
+  if (isNaN(price)) {
+    alert("Invalid price format. Use 4 Cr or 30 L.");
+    return;
+  }
+
+  // ❌ PRICE <= 0
+  if (price <= 0) {
+    alert("Price must be greater than 0.");
+    return;
+  }
+
+  // ❌ PRICE LESS THAN 30 LAKHS
+  if (price < 3000000) {
+    alert("Minimum retain price is 30 Lakhs (30 L).");
+    return;
+  }
+
+  // Fetch player
+  const pSnap = await db.collection("players").doc(pid).get();
+  if (!pSnap.exists) {
+    alert("Player not found.");
+    return;
+  }
+
+  const player = pSnap.data();
+
+  // Update player as retained
+  await db.collection("players").doc(pid).update({
+    soldTo: TEAM_NAME,
+    soldPrice: price
+  });
+
+  // Update team purse
+  const tRef = db.collection("teams").doc(TEAM_NAME);
+  const tSnap = await tRef.get();
+  const t = tSnap.data();
+
+  const newPurse = t.purse - price;
+
+  await tRef.update({
+    purse: newPurse,
+    players: firebase.firestore.FieldValue.arrayUnion(pid)
+  });
+
+  // LOG TO FIRESTORE (admin sees this)
+  await db.collection("logs").add({
+    text: `${TEAM_NAME} retained ${player.name} for ₹ ${formatBasePrice(price)}`,
+    ts: Date.now(),
+    type: "retained"
+  });
+
+  // SUCCESS ALERT (fixed)
+  alert(`${TEAM_NAME} retained ${player.name} for ₹ ${formatBasePrice(price)} successfully!`);
+
+  msg.style.color = "green";
+  msg.innerText = `Retained ${player.name} for ₹ ${formatBasePrice(price)} !`;
+  document.getElementById("playerSearch").value = "";
+document.getElementById("retainPrice").value = "";
+document.getElementById("retainPlayerId").value = "";
+document.getElementById("searchResults").style.display = "none";
+
+  setTimeout(() => msg.innerText = "", 3000);
+};
+
 
 
 
@@ -222,3 +366,4 @@ document.getElementById("bidBtn").onclick = async () => {
 ---------------------------------------------------- */
 loadTeamInfo();
 listenToAuction();
+loadAllPlayersForSearch();   // <-- ADD THIS

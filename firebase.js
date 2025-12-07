@@ -1,16 +1,15 @@
-// firebase.js
-
 const firebaseConfig = {
-  apiKey: "AIzaSyB65CPz-PKiBbgLs0Xang8jb4dzMswRHco",
-  authDomain: "mock-auction-ee4ee.firebaseapp.com",
-  projectId: "mock-auction-ee4ee",
-  storageBucket: "mock-auction-ee4ee.appspot.com",
-  messagingSenderId: "417616243280",
-  appId: "1:417616243280:web:0ec9581b943bfaf1ebff55"
+  apiKey: "AIzaSyCK2513a9Vw1I_2n3MXKXSHcdHuPX7mNzg",
+  authDomain: "auction-eea33.firebaseapp.com",
+  projectId: "auction-eea33",
+  storageBucket: "auction-eea33.firebasestorage.app",
+  messagingSenderId: "888175405800",
+  appId: "1:888175405800:web:36691e4f4f2cf97a40375d",
+  measurementId: "G-JN1MMYTXMY"
 };
 
 firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
 const db = firebase.firestore();
+const auth = firebase.auth();
 const storage = firebase.storage();

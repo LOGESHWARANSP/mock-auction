@@ -181,7 +181,7 @@
   { "id": "p161", "name": "Ben Lister", "role": "Bowler", "country": "New Zealand", "basePrice": 7000000 },
 
   { "id": "p162", "name": "Marcus Stoinis", "role": "All Rounder", "country": "Australia", "basePrice": 20000000 },
-  { "id": "p163", "name": "Mitchell Marsh", "role": "All Rounder", "country": "Australia", "basePrice": 25000000 },
+  { "id": "p163", "name": "Mitchell Marsh", "role": "All Rounder", "country": "Australia", "basePrice": 20000000 },
   { "id": "p164", "name": "Alex Carey", "role": "Wicket Keeper", "country": "Australia", "basePrice": 10000000 },
   { "id": "p165", "name": "Adam Zampa", "role": "Bowler", "country": "Australia", "basePrice": 16000000 },
   { "id": "p166", "name": "Matt Henry", "role": "Bowler", "country": "New Zealand", "basePrice": 9000000 },
@@ -959,6 +959,14 @@
   "country": "India",
   "basePrice": 3000000
 },
+{
+  "id": "p488",
+  "name": "Abishek Porel",
+  "role": "Wicket Keeper",
+  "country": "India",
+  "basePrice": 20000000
+},
+
 
   { "id": "p501", "name": "Ayush Mhatre", "role": "Batsman", "country": "India", "basePrice": 3000000 },
   { "id": "p502", "name": "Dewald Brevis", "role": "All Rounder", "country": "South Africa", "basePrice": 3000000 },
@@ -974,7 +982,7 @@
   { "id": "p512", "name": "Nicholas Pooran", "role": "Wicket Keeper", "country": "West Indies", "basePrice": 20000000 },
   { "id": "p513", "name": "Allah Ghazanfar", "role": "Bowler", "country": "Afghanistan", "basePrice": 20000000 },
   { "id": "p514", "name": "Ashwani Kumar", "role": "Bowler", "country": "India", "basePrice": 3000000 },
-  { "id": "p515", "name": "Corbin Bosch", "role": "All Rounder", "country": "South Africa", "basePrice": 20000000 },
+  { "id": "p515", "name": "Corbin Bosch", "role": "All Rounder", "country": "South Africa", "basePrice": 3000000 },
   { "id": "p516", "name": "Mayank Markande", "role": "Bowler", "country": "India", "basePrice": 3000000 },
   { "id": "p517", "name": "Raghu Sharma", "role": "Bowler", "country": "India", "basePrice": 3000000 },
   { "id": "p518", "name": "Raj Angad Bawa", "role": "All Rounder", "country": "India", "basePrice": 3000000 },

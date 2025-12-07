@@ -246,6 +246,23 @@ button:hover {
   }
 }
 
+#searchResults {
+    position: absolute !important;
+    z-index: 999999 !important;
+    pointer-events: auto !important;
+}
+
+#searchResults div {
+    pointer-events: auto !important;
+}
+
+.card, .roleBox, div, section {
+    position: relative;
+    z-index: 1;
+}
+
+
+
 
 
 

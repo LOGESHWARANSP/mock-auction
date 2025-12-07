@@ -363,15 +363,14 @@ document.getElementById("resetAllBtn").onclick = async function () {
 for (const t of REAL_TEAMS) {
 
   // 🔥 FIRST remove players field completely
-  await db.collection("teams").doc(t).update({
-    players: firebase.firestore.FieldValue.delete()
-  });
+  
 
-  // 🔥 THEN reset purse + name (no players field recreated)
-  await db.collection("teams").doc(t).set({
+ await db.collection("teams").doc(t).set({
     name: t,
-    purse: INITIAL_PURSE
-  }, { merge:true });
+    purse: INITIAL_PURSE,
+    players: []
+}, { merge: true });
+
 }
 
 
@@ -508,6 +507,24 @@ function loadPlayers() {
 
 
 
+async function ensureTeamsExist() {
+    const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
+    const INITIAL_PURSE = 1250000000; // 125 Cr
+
+    for (const t of REAL_TEAMS) {
+        const ref = db.collection("teams").doc(t);
+        const snap = await ref.get();
+
+        if (!snap.exists) {
+            await ref.set({
+                name: t,
+                purse: INITIAL_PURSE,
+                players: []
+            });
+            console.log("Created team doc:", t);
+        }
+    }
+}
 
 
 /* ---------------------------
@@ -518,11 +535,12 @@ function loadPlayers() {
 
 let teamsUnsub = null;
 
-function loadTeams() {
+async function loadTeams() {
+    await ensureTeamsExist();
+
     const REAL_TEAMS = ["CSK","DC","GT","KKR","LSG","MI","PBKS","RCB","RR","SRH"];
 
-    // Prevent duplicate listeners
-    if (teamsUnsub) return;  
+    if (teamsUnsub) return;
 
     teamsUnsub = db.collection("teams").onSnapshot(async snap => {
         const tbody = document.querySelector('#teamsTable tbody');
@@ -553,6 +571,24 @@ function loadTeams() {
     });
 }
 
+db.collection("logs")
+  .orderBy("ts", "desc")
+  .limit(50)
+  .onSnapshot(snap => {
+    const logBox = document.getElementById("log");
+    logBox.innerHTML = "";
+
+    snap.forEach(doc => {
+      const log = doc.data();
+      const time = new Date(log.ts).toLocaleTimeString();
+
+      logBox.innerHTML += `
+        <div style="margin-bottom:6px;">
+            [${time}] ${log.text}
+        </div>
+      `;
+    });
+});
 
 
 

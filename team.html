@@ -19,6 +19,47 @@
 
   <p><strong>Purse:</strong> <span id="purse">-</span></p>
   <div id="myPlayers" style="display:none;"></div>
+  <h3 style="margin-top:25px;">Retain a Player</h3>
+
+<div style="display:flex; gap:10px; align-items:flex-start; position:relative; z-index:10000;">
+
+    <!-- Search Box -->
+    <div style="position:relative;">
+       <input id="playerSearch" placeholder="Select Player to Retain"
+       style="padding:10px; width:260px; border:1px solid #555;">
+         <input type="hidden" id="retainPlayerId">
+
+        <!-- Search Results -->
+        <div id="searchResults"
+     style="
+        display:none;
+        position:absolute;
+        width:260px;
+        background:white;
+        color:black;
+        border:1px solid #ccc;
+        max-height:250px;
+        overflow-y:auto;
+        z-index:9999;
+        border-radius:6px;
+     ">
+</div>
+
+    </div>
+
+    <!-- Price Input -->
+    <input id="retainPrice" placeholder="Enter Price "
+           style="padding:10px; width:150px; border:1px solid #555; 
+                  border-radius:6px; background:#111; color:white;">
+
+    <!-- Button -->
+    <button id="retainBtn"
+            style="padding:10px 18px; border:none; background:#007bff; 
+                   color:white; border-radius:6px; cursor:pointer;">
+        RETAIN
+    </button>
+</div>
+
 
   <!-- SQUAD -->
   <h3>Your Squad</h3>
@@ -46,9 +87,10 @@
     </div>
 
   </div>
+  
 
   <!-- CURRENT PLAYER -->
-  <h3 style="margin-top:30px;">🔥 Current Player</h3>
+  <h3 style="margin-top:30px;">Current Player</h3>
 
   <div id="live-panel" style="border:1px solid #ddd;padding:12px;border-radius:8px;">
     <img id="pImg" src="default-player.png"

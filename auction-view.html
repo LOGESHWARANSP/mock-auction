@@ -210,6 +210,23 @@ db.collection("auction").doc("current").onSnapshot(async snap => {
 });
 
 
+db.collection("auctionLogs")
+  .orderBy("timestamp", "desc")
+  .limit(10)
+  .onSnapshot(snap => {
+      let html = "";
+      snap.forEach(doc => {
+          const log = doc.data();
+          if (log.type === "retained") {
+              html += `
+                <p style="margin:6px 0;">
+                    🔵 <b>${log.team}</b> retained <b>${log.player}</b>
+                    for <span style="color:#0af;">₹ ${formatBasePrice(log.price)}</span>
+                </p>`;
+          }
+      });
+      document.getElementById("liveUpdates").innerHTML = html;
+  });
 
 
 /* =========================================================
